@@ -9,7 +9,7 @@ In this project, we would want to have a clear and compact representation of the
 Next, we will observe the evolutation through the years of the best rated movies with respect to their genre and popularity. We will also have a deeper look at the actors: which movie genre they usually play in, with which other actors do they play with in general. And finally with the previous observations, we can see whether there is a bias in the ratings in recent years, with the popularisation of the IMDb website. More precisely, is there a relationship between a movie's genre or actors and the movie's popularity or rating and how it changed through the years.
 
 ## Exploratory data analysis
-Exploration and preparation of the dataset is in the python jupyter notebook `data_exploration.ipynb`.
+Exploration and preparation of the dataset can be found in the python jupyter notebook `data_exploration.ipynb` [here](https://github.com/com-480-data-visualization/datavis-project-2022-teamsalt/blob/main/data_exploration.ipynb).
 
 ## Related work
 HAVE A LOOK ONLINE
