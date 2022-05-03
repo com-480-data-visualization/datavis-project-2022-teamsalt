@@ -1,4 +1,67 @@
 
+/*
+Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
+*/
+html, body, figure {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+
+html {
+	font-family: helvetica, sans-serif;
+}
+
 body {
-	background-color: rgba(150, 32, 93, 0.8)
+	background-color: rgba(150, 32, 93, 0.8);
+}
+
+.proj_img {
+	background-color: rgba(0, 0, 0, 0)
+}
+
+p {
+	text-align: justify;
+}
+
+.navbar {
+  background-color: black;
+  /*border-radius: 30px;*/
+	/*position: fixed;*/
+}
+
+.navbar li {
+	display: flex;
+  list-style: none;
+  margin: 13px 20px;
+	display: inline-block;
+}
+
+.navbar li:first-child {
+  float: left;
+}
+
+.navbar ul {
+  overflow: auto;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+#menu {
+  text-align:right;
+}
+
+.navbar li a {
+  padding: 10px 25px;
+	display: block;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: white;
+	letter-spacing:.2em;
+}
+
+.navbar li a:hover {
+  color: rgba(150, 32, 93, 0.8)
 }
