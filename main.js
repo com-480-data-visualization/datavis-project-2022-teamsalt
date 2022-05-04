@@ -30,7 +30,7 @@ const margin = {top: 40, right:90, bottom: 80, left: 60};
 const width = 900 - margin.left - margin.right;
 const height = 400 - margin.top - margin.bottom;
 
-let svg = d3.select("#viz")
+let svg = d3.select("#plot")
             .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
