@@ -31,6 +31,14 @@ images.
 ## Sketch and tools
 We will use d3 most likely.
 
+The first part consist of a list where parameters can be changed. Hovering or clicking movies in the list will either show on the mouse some details or on the side.
+
+![Part 1](img/dataviz-part1.png)
+
+Then for the second part there will a plot where the y-axis parameter can be chosen and it will display its evolution through the years. One idea is to have the possibilty to "slide" over the x-axis to not have all the years clumped up and only show a few years at a time. Since we are building plots, SVG will most likely be necessary for this part.
+
+![Part 2](img/dataviz-part2.png)
+
 ## Experimental ideas
 Here we will write any hard-to-implement ideas for the project if any come to
 mind. If you yourself have any ideas feel free to share with us :)
