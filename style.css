@@ -30,6 +30,7 @@ p {
   /*border-radius: 30px;*/
 	position: fixed; /* Set the navbar to fixed position */
  	top: 0; /* Position the navbar at the top of the page */
+	width: 100%;
 }
 
 .navbar li {
@@ -47,11 +48,11 @@ p {
   overflow: auto;
   margin: 0 auto;
   padding: 0;
-  width: 100%;
 }
 
 #menu {
   text-align:right;
+	width: 100%;
 }
 
 .navbar li a {
@@ -65,4 +66,46 @@ p {
 
 .navbar li a:hover {
   color: rgba(150, 32, 93, 0.8)
+}
+
+#intro {
+	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	flex-direction: column;
+ 	margin-top: 10px;
+}
+
+#top {
+	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	flex-direction: column;
+ 	margin-top: 10px;
+}
+
+.select-label {
+  margin-right: 10px;
+  font-size: 1rem;
+	align-items: center;
+	justify-content: center;
+}
+
+#options {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+}
+#genres {
+  align-items: center;
+  justify-content: center;
+}
+#metrics {
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+#years {
+  align-items: center;
+  justify-content: center;
 }
