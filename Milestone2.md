@@ -31,13 +31,29 @@ images.
 ## Sketch and tools
 We will use d3 most likely.
 
-The first part consist of a list where parameters can be changed. Hovering or clicking movies in the list will either show on the mouse some details or on the side.
+The first part consist of a list where parameters can be changed. Hovering or
+clicking movies in the list will either show on the mouse some details or on
+the side.
 
 ![Part 1](img/dataviz-part1.png)
 
-Then for the second part there will a plot where the y-axis parameter can be chosen and it will display its evolution through the years. One idea is to have the possibilty to "slide" over the x-axis to not have all the years clumped up and only show a few years at a time. Since we are building plots, SVG will most likely be necessary for this part.
+Then for the second part there will a plot where the y-axis parameter can be
+chosen and it will display its evolution through the years. One idea is to have
+the possibilty to "slide" over the x-axis to not have all the years clumped up
+and only show a few years at a time. Since we are building plots, SVG will most
+likely be necessary for this part. The projector can simulate the animation for
+the transition between different plots.
 
 ![Part 2](img/dataviz-part2.png)
+
+For the third part we will plot the graph projected in 2d space. At first we
+will make it into a static image with the names of some of the actors written
+next to the nodes, just to make sure that everything works. After that, we
+expect to make something like in the next picture (but prettier) where the user
+can zoom and pan the image and click on some of the nodes to reveal extra
+information.
+
+![Part 3](img/dataviz-part3.png)
 
 ## Experimental ideas
 Here we will write any hard-to-implement ideas for the project if any come to
