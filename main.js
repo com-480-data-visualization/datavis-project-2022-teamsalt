@@ -38,23 +38,6 @@
 //       console.log(data);
 //   });
 
-// // Part 1: Ranking lists
-// // Define ranking metrics and movies genres (static)
-// const rankingMetrics = ['averageRating', 'numVotes'];
-//
-// const allGenres = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
-// 'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Game-Show', 'History', 'Horror',
-// 'Music', 'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
-// 'Talk-Show', 'Thriller', 'War', 'Western'];
-//
-// const rankingDiv = d3.select('#ranking').append('h1').attr('id', 'top').text('Movie Rankings');
-//
-// const optionsDiv = rankingDiv.append('div').attr('id', 'options');
-// const metricDiv = optionsDiv.append('div').attr('id', 'metrics');
-// const genreDiv = optionsDiv.append('div').attr('id', 'genres');
-//
-// metricDiv.append('label').attr('class', 'select-label').text('Select Metric:');
-
 d3.csv("data/movie_dataset.csv").then(function(data) {
   genres = Array.from(new Set(data.map(element => element.genres))).sort();
 
@@ -63,7 +46,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   // Define ranking metrics and movies genres (static)
   const rankingMetrics = ['averageRating', 'numVotes'];
 
-  const allGenres = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
+  const allGenres = ['Any', 'Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
   'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Game-Show', 'History', 'Horror',
   'Music', 'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
   'Talk-Show', 'Thriller', 'War', 'Western'];
@@ -76,9 +59,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   const maxYear = 2022;
 
   // Define divs
-  const rankingDiv = d3.select('#ranking').append('h1').attr('id', 'top').text('Movie Rankings');
-
-  const moviesDiv = rankingDiv.append('div').attr('id', 'movieData');
+  const rankingDiv = d3.select('#part1div').append('h1').attr('id', 'top').text('Movie Rankings');
 
   const optionsDiv = rankingDiv.append('div').attr('id', 'options');
   const metricDiv = optionsDiv.append('div').attr('id', 'metrics');
@@ -119,7 +100,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       const currentGenre = document.getElementById('genreSelect').value;
       const currentMetric = document.getElementById('metricSelect').value;
       const currentYear = document.getElementById('yearSelect').value;
-      getMovieDataForMetric(currentMetric, currentGenre, currentYear);
+      getMovieData(currentMetric, currentGenre, currentYear);
     });
 
   genreSelect
@@ -140,7 +121,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         const currentGenre = document.getElementById('genreSelect').value;
         const currentMetric = document.getElementById('metricSelect').value;
         const currentYear = document.getElementById('yearSelect').value;
-        getMovieDataForMetric(currentMetric, currentGenre, currentYear);
+        getMovieData(currentMetric, currentGenre, currentYear);
       });
 
     yearSelect
@@ -152,16 +133,52 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         return d;
       })
 
+    //const moviesDiv = rankingDiv.append('div').attr('id', 'movieData');
+    // Create initial ranking (average rating, any genres, any year)
+    var topData = data.sort(function(a, b) {
+      return d3.descending(+a.averageRating, +b.averageRating);
+    }).slice(0, 10);
+    console.log(topData)
+
+    const rankingList = rankingDiv
+      .append('ul')
+      .attr('id', 'ranked')
+      .attr('class', 'ranked')
+      .selectAll('li')
+      .data(topData)
+      .enter()
+      .append('li')
+      .attr('id', 'ranked')
+      .text(function (d) {
+         return d.primaryTitle;
+       })
+
     // Function called on each selection
-    const getMovieDataForYear = async (metric, genre, year) => {
+    const getMovieData = async (metric, genre, year) => {
       // clear
-      moviesDiv.html('');
+      //moviesDiv.html('');
+
+      var newTopData = data.sort(function(a, b) {
+        return d3.descending(+a.metric, +b.metric);
+      }).slice(0, 10);
+      console.log(newTopData)
+
+      //console.log(data)
+      moviesDiv.append('ul')
+               .attr('id', 'rankingList')
+               .data(newTopData)
+               .enter()
+               .append('li')
+               .text(function (d) {
+                 return d.primaryTitle;
+               })
 
 
     };
 
 // =============================================================================
 
+  const part2Div = d3.select('#part2div').append('h1').attr('id', 'top').text('Plots');
   // Part 2: Plots
   d3.select('#genre_select')
     .selectAll('option')
@@ -205,6 +222,12 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       .call(d3.axisBottom(xScale));
   svg.append("g")
       .call(d3.axisLeft(yScale));
+
+
+// =============================================================================
+  // Part 3
+  const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
+
 
 });
 
