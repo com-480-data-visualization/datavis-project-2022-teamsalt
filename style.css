@@ -68,6 +68,10 @@ p {
   color: rgba(150, 32, 93, 0.8)
 }
 
+#pad {
+	margin-top: 10px;
+}
+
 #intro {
 	display: flex;
  	justify-content: center;
@@ -105,12 +109,40 @@ p {
   align-items: center;
   justify-content: center;
   margin-right: 10px;
+	margin-left: 5px;
 }
 #years {
   align-items: center;
   justify-content: center;
+	margin-left: 10px;
 }
 /* ========================================================================== */
+
+#part1div {
+	float: left;
+	overflow: hidden;
+	height: 700px;
+	width: 700px;
+}
+
+#tooltip {
+	text-align: center;
+	border: thick black solid;
+  border-radius: 20px 10px;
+	background: #bf2e77;
+	margin-left: 1150px;
+	height: 300px;
+	width: 400px;
+	font-size: 25px;
+}
+
+.selected {
+	color: #fff;
+}
+
+#part2div {
+	clear:both;
+}
 
 /* ========================================================================== */
 /* Ranking list Part 1 */
@@ -119,7 +151,6 @@ p {
   padding: 0;
   max-width: 300px;
 }
-
 /* List element */
 #ranked li {
   counter-increment: index;
@@ -127,11 +158,11 @@ p {
   /* align-items: center; */
   padding: 12px 0;
   box-sizing: border-box;
+	font-size: 25px;
 }
-
 /* Element counter */
 #ranked li::before {
-  content: counters(index, ".", decimal-leading-zero);
+  content: counters(index, ".");
   font-size: 1.5rem;
   text-align: right;
   font-weight: bold;
@@ -144,9 +175,48 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 /* Element separation */
 #ranked li + li {
   border-top: 1px solid rgba(255,255,255,0.2);
 }
+#ranked li:hover {
+	background-image: linear-gradient(to right, rgba(158, 24, 122, 0.8), rgba(150, 32, 93, 0.8));
+}
 /* ========================================================================== */
+/* Loading animation */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+	margin-top: 200px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

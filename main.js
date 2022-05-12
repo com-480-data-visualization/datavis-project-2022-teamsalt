@@ -41,6 +41,20 @@
 d3.csv("data/movie_dataset.csv").then(function(data) {
   genres = Array.from(new Set(data.map(element => element.genres))).sort();
 
+  const asyncForEach = async (array, callback) => {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
+  };
+
+  const createLoadingAnimation = () => {
+      const loadingAnimation = d3.create('div').attr('class', 'lds-ring');
+      loadingAnimation.append('div');
+      loadingAnimation.append('div');
+      loadingAnimation.append('div');
+      return loadingAnimation;
+    };
+
 // =============================================================================
   // Part 1: Ranking lists
   // Define ranking metrics and movies genres (static)
@@ -113,7 +127,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     })
 
     // Years dropdown selection
-    genreDiv.append('label').attr('class', 'select-label').text('Select Year:');
+    yearDiv.append('label').attr('class', 'select-label').text('Select Year:');
     const yearSelect = yearDiv
       .append('select')
       .attr('id', 'yearSelect')
@@ -124,21 +138,29 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         getMovieData(currentMetric, currentGenre, currentYear);
       });
 
+    var yearsList = rangeOfYears(minYear, maxYear)
+    yearsList.push("All")
+    yearsList = yearsList.reverse()
     yearSelect
       .selectAll('option')
-      .data(rangeOfYears(minYear, maxYear).reverse())
+      .data(yearsList)
       .enter()
       .append('option')
       .text(function (d) {
         return d;
       })
 
-    //const moviesDiv = rankingDiv.append('div').attr('id', 'movieData');
     // Create initial ranking (average rating, any genres, any year)
     var topData = data.sort(function(a, b) {
       return d3.descending(+a.averageRating, +b.averageRating);
     }).slice(0, 10);
-    console.log(topData)
+    //console.log(topData)
+
+    var tooltip = rankingDiv.append('div').attr('id', 'tooltip')
+      .style("position", "absolute")
+      .style("z-index", "10")
+      .style("visibility", "hidden")
+      // .text("Nothing to show");
 
     const rankingList = rankingDiv
       .append('ul')
@@ -152,29 +174,80 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       .text(function (d) {
          return d.primaryTitle;
        })
+      .on("click", function(d) {
+        //console.log(d)
+        // Highlight selected item in list
+        d3.select(".selected").classed("selected", false);
+        d3.select(this).classed("selected", true);
+
+        d3.select("#tooltip")
+        .text("Average rating: " + d.averageRating)
+        .text("Year: " + d.startYear.slice(0, -2))
+        .text("Genres: " + d.genres);
+        return tooltip.style("visibility", "visible");
+      })
 
     // Function called on each selection
     const getMovieData = async (metric, genre, year) => {
-      // clear
-      //moviesDiv.html('');
+      // Clear previous ranking
+      rankingDiv.selectAll('.ranked').remove();
+      d3.select("#tooltip").style("visibility", "hidden")
+      // Add loading animation
+      rankingDiv.append(() => createLoadingAnimation().node());
+      setTimeout(function() {
+        // Compute new ranking
+        // Treat Years
+        if (year == 'All') {
+          var byYears = data;
+        } else {
+          var byYears = data.filter(function(row) {
+            return row['startYear'].slice(0, -2) == year
+          });
+        }
+        // Treat Genres
+        if (genre === 'Any') {
+          var byGenre = byYears;
+        } else {
+          var byGenre = byYears.filter(function(row) {
+            return row['genres'].includes(genre)
+          });
+        }
+        // Treat Metric
+        var newTopData = byGenre.sort(function(a, b) {
+          if (metric === "Number of votes") {
+            return d3.descending(+a.numVotes, +b.numVotes);
+          } else {
+            return d3.descending(+a.averageRating, +b.averageRating);
+          }
+        }).slice(0, 10);
+        //console.log(newTopData)
+        // Create new ranking list
+        rankingDiv.append('ul')
+                  .attr('id', 'ranked')
+                  .attr('class', 'ranked')
+                  .selectAll('li')
+                  .data(newTopData)
+                  .enter()
+                  .append('li')
+                  //.attr('onmouseover', 'hover(this)')
+                  .attr('id', 'ranked')
+                  .text(function (d) {
+                     return d.primaryTitle;
+                   })
+                  .on("click", function(d) {
+                    // Highlight selected item in list
+                    d3.select(".selected").classed("selected", false);
+                    d3.select(this).classed("selected", true);
 
-      var newTopData = data.sort(function(a, b) {
-        return d3.descending(+a.metric, +b.metric);
-      }).slice(0, 10);
-      console.log(newTopData)
-
-      //console.log(data)
-      moviesDiv.append('ul')
-               .attr('id', 'rankingList')
-               .data(newTopData)
-               .enter()
-               .append('li')
-               .text(function (d) {
-                 return d.primaryTitle;
-               })
-
-
-    };
+                    d3.select("#tooltip")
+                    .text("Average rating: " + d.averageRating)
+                    .text("Year: " + d.startYear.slice(0, -2))
+                    .text("Genres: " + d.genres);
+                    return tooltip.style("visibility", "visible");
+                  })
+        rankingDiv.selectAll('.lds-ring').remove();
+      }, 2000);
+    }
 
 // =============================================================================
 
