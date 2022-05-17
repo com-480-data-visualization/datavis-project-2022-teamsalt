@@ -261,10 +261,10 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   metricDivPart2.append('label').attr('class', 'select-label').text('Select Metric:');
   const metricSelectPart2 = metricDivPart2
     .append('select')
-    .attr('id', 'metricSelect')
+    .attr('id', 'metricSelectPart2')
     .on('change', function (event) {
-      const currentGenre = document.getElementById('genreSelect').value;
-      const currentMetric = document.getElementById('metricSelect').value;
+      const currentGenre = document.getElementById('genreSelectPart2').value;
+      const currentMetric = document.getElementById('metricSelectPart2').value;
       getPlotData(currentMetric, currentGenre);
     });
 
@@ -285,10 +285,10 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   genreDivPart2.append('label').attr('class', 'select-label').text('Select Genre:');
   const genreSelectPart2 = genreDivPart2
     .append('select')
-    .attr('id', 'genreSelect')
+    .attr('id', 'genreSelectPart2')
     .on('change', function (event) {
-      const currentGenre = document.getElementById('genreSelect').value;
-      const currentMetric = document.getElementById('metricSelect').value;
+      const currentGenre = document.getElementById('genreSelectPart2').value;
+      const currentMetric = document.getElementById('metricSelectPart2').value;
       getPlotData(currentMetric, currentGenre);
     });
 
@@ -321,12 +321,18 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
           let sumVotes = 0;
           let sumRating = 0;
           let count = 0;
+          let genres = []
           for (var j=0; j < moviePerYear[i][1].length; ++j) {
               sumVotes += +moviePerYear[i][1][j].numVotes;
               sumRating += +moviePerYear[i][1][j].averageRating;
               count += 1;
+              for (g in moviePerYear[i][1][j].genres) {
+                  if (!genres.includes(g)) {
+                    genres.push(g);
+                  }
+              }
           }
-          plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count});
+          plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count, genres: genres});
       }
   }
   console.log(plotData)
@@ -338,7 +344,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   // y-axis label
   svg.append("text")
       .attr("transform", "rotate(270)")
-      .attr("y", - margin.left/2 -10)
+      .attr("y", - margin.left/2)
       .attr("x", - height/2 -60)
       .text("Average Rating");
 
@@ -364,7 +370,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       .attr("x", d => xScale(+(d.year)))
       .attr("width", xScale.bandwidth())
       .attr("fill", "#910657")
-      .attr("height", function(d) { return height - yScale(0); })
+      .attr("height", function(d) { return height - yScale(0);})
       .attr("y", d => yScale(0))
   // Animation
   svg.selectAll("rect")
@@ -374,31 +380,60 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       .attr("height", function(d) { return Math.abs(height - yScale(d.meanRating)); })
       .delay(function(d, i){ console.log(i); return(i*100)})
 
+  // UPDATE PLOT
   const getPlotData = async (metric, genre) => {
       svg.selectAll("rect").remove()
       svg.selectAll("text").remove()
 
-      let xScale= d3.scaleBand()
-          .domain(rangeOfYears(minYear, maxYear))
-          .padding(0.2)
-          .range([0, width]);
-      let yScale = d3.scaleLinear()
-          .domain([0, 10])
-          .range([height, 0]);
+      if (genre === 'Any') {
+        var newPlotData = plotData;
+      } else {
+        var newPlotData = plotData.filter(function(row) {
+          return row['genres'].includes(genre)
+        });
+      }
+      const moviePerGenre = data.filter(function(row) {
+          for (genre in allGenres) {
+              return row['genres'].includes(genre)
+          }
+      });
+      console.log(moviePerGenre)
 
       // x-axis label
       svg.append("text")
           .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
           .text("Years");
-      // y-axis label
-      svg.append("text")
-          .attr("transform", "rotate(270)")
-          .attr("y", - margin.left/2 -10)
-          .attr("x", - height/2 -60)
-          .text("Jugs");
+      // let xScale= d3.scaleBand()
+      //     .domain(rangeOfYears(minYear, maxYear))
+      //     .padding(0.2)
+      //     .range([0, width]);
+      if (metric === "Number of votes") {
+        yScale = d3.scaleLinear()
+            .domain([0, 200000])
+            .range([height, 0]);
+        svg.append("text")
+            .attr("transform", "rotate(270)")
+            .attr("y", - margin.left/2 - 20 )
+            .attr("x", - height/2 -60)
+            .text("Number of votes");
+      } else {
+        yScale = d3.scaleLinear()
+            .domain([0, 10])
+            .range([height, 0]);
+        svg.append("text")
+            .attr("transform", "rotate(270)")
+            .attr("y", - margin.left/2)
+            .attr("x", - height/2 -60)
+            .text("Average Rating");
+      }
+      svg.append("g")
+          .attr("transform","translate(0, "+height+")")
+          .call(d3.axisBottom(xScale));
+      svg.append("g")
+          .call(d3.axisLeft(yScale));
 
       svg.selectAll("rect")
-          .data(plotData)
+          .data(newPlotData)
           .enter()
           .append("rect")
           .attr("x", d => xScale(+(d.year)))
