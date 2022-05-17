@@ -17,8 +17,21 @@ body {
 	background-color: rgba(150, 32, 93, 0.8);
 }
 
-.proj_img {
-	background-color: rgba(0, 0, 0, 0)
+#proj_img {
+	background-color: rgba(0, 0, 0, 0);
+	margin-top: 100px;
+}
+
+.container {
+    display: flex;
+}
+
+.col {
+    flex: 1;
+}
+
+.col:first-child {
+    margin-right: 20px;
 }
 
 p {

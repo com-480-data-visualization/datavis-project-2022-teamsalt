@@ -253,16 +253,56 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
 
   const part2Div = d3.select('#part2div').append('h1').attr('id', 'top').text('Plots');
   // Part 2: Plots
-  d3.select('#genre_select')
+  const optionsDivPart2 = part2Div.append('div').attr('id', 'options');
+  const metricDivPart2 = optionsDivPart2.append('div').attr('id', 'metrics');
+  const genreDivPart2 = optionsDivPart2.append('div').attr('id', 'genres');
+
+  // Metric dropdown selection
+  metricDivPart2.append('label').attr('class', 'select-label').text('Select Metric:');
+  const metricSelectPart2 = metricDivPart2
+    .append('select')
+    .attr('id', 'metricSelect')
+    .on('change', function (event) {
+      const currentGenre = document.getElementById('genreSelect').value;
+      const currentMetric = document.getElementById('metricSelect').value;
+      getPlotData(currentMetric, currentGenre);
+    });
+
+  metricSelectPart2
     .selectAll('option')
-    .data(genres)
+    .data(rankingMetrics)
     .enter()
-    .append("option")
-    .text(d => d)
-    .attr('value', d => d);
+    .append('option')
+    .text(function (d) {
+      if (d === "averageRating") {
+        return "Average Rating"
+      } else {
+        return "Number of votes"
+      }
+    });
+
+  // Genres dropdown selection
+  genreDivPart2.append('label').attr('class', 'select-label').text('Select Genre:');
+  const genreSelectPart2 = genreDivPart2
+    .append('select')
+    .attr('id', 'genreSelect')
+    .on('change', function (event) {
+      const currentGenre = document.getElementById('genreSelect').value;
+      const currentMetric = document.getElementById('metricSelect').value;
+      getPlotData(currentMetric, currentGenre);
+    });
+
+  genreSelectPart2
+    .selectAll('option')
+    .data(allGenres)
+    .enter()
+    .append('option')
+    .text(function (d) {
+      return d;
+    })
 
   const margin = {top: 40, right:90, bottom: 80, left: 60};
-  const width = 900 - margin.left - margin.right;
+  const width = 950 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
   let svg = d3.select("#plot")
@@ -273,29 +313,119 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
               .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
 
-  svg.append("text")
-      .attr("transform","translate(" + ((width/2)-60) + " ," + (height + margin.top + 30) + ")")
-      .text("Years");
+  // Prepare data for plots
+  const moviePerYear = d3.groups(data, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
+  var plotData = [];
+  for(var i=0; i < moviePerYear.length; ++i) {
+      if (moviePerYear[i][0] >= 1990) {
+          let sumVotes = 0;
+          let sumRating = 0;
+          let count = 0;
+          for (var j=0; j < moviePerYear[i][1].length; ++j) {
+              sumVotes += +moviePerYear[i][1][j].numVotes;
+              sumRating += +moviePerYear[i][1][j].averageRating;
+              count += 1;
+          }
+          plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count});
+      }
+  }
+  console.log(plotData)
 
+  // x-axis label
+  svg.append("text")
+      .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
+      .text("Years");
+  // y-axis label
   svg.append("text")
       .attr("transform", "rotate(270)")
       .attr("y", - margin.left/2 -10)
-      .attr("x",  -height/2 -60)
-      .text("TBD");
+      .attr("x", - height/2 -60)
+      .text("Average Rating");
 
-  let xScale= d3.scaleLinear()
-      .domain([1900,2022])
-      .range([0,width]);
+  let xScale= d3.scaleBand()
+      .domain(rangeOfYears(minYear, maxYear))
+      .padding(0.2)
+      .range([0, width]);
   let yScale = d3.scaleLinear()
-      .domain([0,100])
-      .range([height,0]);
+      .domain([0, 10])
+      .range([height, 0]);
 
   svg.append("g")
-      .attr("transform","translate(0,"+height+")")
+      .attr("transform","translate(0, "+height+")")
       .call(d3.axisBottom(xScale));
   svg.append("g")
       .call(d3.axisLeft(yScale));
 
+  // Create initial barplot
+  svg.selectAll("rect")
+      .data(plotData)
+      .enter()
+      .append("rect")
+      .attr("x", d => xScale(+(d.year)))
+      .attr("width", xScale.bandwidth())
+      .attr("fill", "#910657")
+      .attr("height", function(d) { return height - yScale(0); })
+      .attr("y", d => yScale(0))
+  // Animation
+  svg.selectAll("rect")
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return yScale(d.meanRating); })
+      .attr("height", function(d) { return Math.abs(height - yScale(d.meanRating)); })
+      .delay(function(d, i){ console.log(i); return(i*100)})
+
+  const getPlotData = async (metric, genre) => {
+      svg.selectAll("rect").remove()
+      svg.selectAll("text").remove()
+
+      let xScale= d3.scaleBand()
+          .domain(rangeOfYears(minYear, maxYear))
+          .padding(0.2)
+          .range([0, width]);
+      let yScale = d3.scaleLinear()
+          .domain([0, 10])
+          .range([height, 0]);
+
+      // x-axis label
+      svg.append("text")
+          .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
+          .text("Years");
+      // y-axis label
+      svg.append("text")
+          .attr("transform", "rotate(270)")
+          .attr("y", - margin.left/2 -10)
+          .attr("x", - height/2 -60)
+          .text("Jugs");
+
+      svg.selectAll("rect")
+          .data(plotData)
+          .enter()
+          .append("rect")
+          .attr("x", d => xScale(+(d.year)))
+          .attr("width", xScale.bandwidth())
+          .attr("fill", "#910657")
+          .attr("height", function(d) { return height - yScale(0); })
+          .attr("y", d => yScale(0))
+      // Animation
+      svg.selectAll("rect")
+          .transition()
+          .duration(800)
+          .attr("y", function(d) {
+            if (metric === "Number of votes") {
+              return yScale(d.meanVotes);
+            } else {
+              return yScale(d.meanRating);
+            }
+          })
+          .attr("height", function(d) {
+            if (metric === "Number of votes") {
+              return Math.abs(height - yScale(d.meanVotes));
+            } else {
+              return Math.abs(height - yScale(d.meanRating));
+            }
+          })
+          .delay(function(d, i){ console.log(i); return(i*100)})
+  }
 
 // =============================================================================
   // Part 3
