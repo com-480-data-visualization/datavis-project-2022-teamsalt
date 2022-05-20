@@ -313,28 +313,54 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
               .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
 
-  // Prepare data for plots
-  const moviePerYear = d3.groups(data, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
-  var plotData = [];
-  for(var i=0; i < moviePerYear.length; ++i) {
-      if (moviePerYear[i][0] >= 1990) {
-          let sumVotes = 0;
-          let sumRating = 0;
-          let count = 0;
-          let genres = []
-          for (var j=0; j < moviePerYear[i][1].length; ++j) {
-              sumVotes += +moviePerYear[i][1][j].numVotes;
-              sumRating += +moviePerYear[i][1][j].averageRating;
-              count += 1;
-              for (g in moviePerYear[i][1][j].genres) {
-                  if (!genres.includes(g)) {
-                    genres.push(g);
+  function prepare_data(array) {
+      const moviePerYear = d3.groups(array, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
+      var plotData = [];
+      for(var i=0; i < moviePerYear.length; ++i) {
+          if (moviePerYear[i][0] >= 1990) {
+              let sumVotes = 0;
+              let sumRating = 0;
+              let count = 0;
+              let genres = []
+              for (var j=0; j < moviePerYear[i][1].length; ++j) {
+                  sumVotes += +moviePerYear[i][1][j].numVotes;
+                  sumRating += +moviePerYear[i][1][j].averageRating;
+                  count += 1;
+                  for (g in moviePerYear[i][1][j].genres) {
+                      if (!genres.includes(g)) {
+                        genres.push(g);
+                      }
                   }
               }
+              plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count, genres: genres});
           }
-          plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count, genres: genres});
       }
+      return plotData
   }
+
+  // Prepare data for plots
+  // const moviePerYear = d3.groups(data, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
+  // var plotData = [];
+  // for(var i=0; i < moviePerYear.length; ++i) {
+  //     if (moviePerYear[i][0] >= 1990) {
+  //         let sumVotes = 0;
+  //         let sumRating = 0;
+  //         let count = 0;
+  //         let genres = []
+  //         for (var j=0; j < moviePerYear[i][1].length; ++j) {
+  //             sumVotes += +moviePerYear[i][1][j].numVotes;
+  //             sumRating += +moviePerYear[i][1][j].averageRating;
+  //             count += 1;
+  //             for (g in moviePerYear[i][1][j].genres) {
+  //                 if (!genres.includes(g)) {
+  //                   genres.push(g);
+  //                 }
+  //             }
+  //         }
+  //         plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count, genres: genres});
+  //     }
+  // }
+  var plotData = prepare_data(data)
   console.log(plotData)
 
   // x-axis label
@@ -388,16 +414,12 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       if (genre === 'Any') {
         var newPlotData = plotData;
       } else {
-        var newPlotData = plotData.filter(function(row) {
+        var newData = data.filter(function(row) {
           return row['genres'].includes(genre)
         });
+        var newPlotData = prepare_data(newData)
       }
-      const moviePerGenre = data.filter(function(row) {
-          for (genre in allGenres) {
-              return row['genres'].includes(genre)
-          }
-      });
-      console.log(moviePerGenre)
+      console.log(newPlotData)
 
       // x-axis label
       svg.append("text")
