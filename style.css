@@ -19,7 +19,11 @@ body {
 
 #proj_img {
 	background-color: rgba(0, 0, 0, 0);
-	margin-top: 100px;
+	margin-top: 25px;
+	max-width: 50%;
+	/*height: auto;*/
+	position: absolute;
+	z-index: 6;
 }
 
 .container {
@@ -44,6 +48,7 @@ p {
 	position: fixed; /* Set the navbar to fixed position */
  	top: 0; /* Position the navbar at the top of the page */
 	width: 100%;
+	z-index: 10;
 }
 
 .navbar li {
@@ -155,6 +160,24 @@ p {
 
 #part2div {
 	clear:both;
+}
+
+#plot {
+	position: absolute;
+	margin-left: 350px;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 200px solid transparent;
+  border-bottom: 100px solid transparent;
+	z-index: 5;
+  border-right: 250px solid #bfbdbd;
+	opacity: 0.6;
+	visibility: hidden;
+	margin-left: 210px;
+	margin-top: 25px;
 }
 
 /* ========================================================================== */
