@@ -1,61 +1,64 @@
-
 /*
 Make the document fill the whole viewport, this overrides any weird defaults that browsers might have.
 */
-html, body, figure {
-	width: 100%;
-	padding: 0;
-	margin: 0;
-	border: 0;
+html,
+body,
+figure {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
 html {
-	font-family: helvetica, sans-serif;
+  font-family: helvetica, sans-serif;
 }
 
 body {
-	background-color: rgba(150, 32, 93, 0.8);
+  background-color: rgba(150, 32, 93, 0.8);
 }
 
 #proj_img {
-	background-color: rgba(0, 0, 0, 0);
-	margin-top: 25px;
-	max-width: 50%;
-	/*height: auto;*/
-	position: absolute;
-	z-index: 6;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 25px;
+  max-width: 50%;
+  /*height: auto;*/
+  position: absolute;
+  z-index: 6;
 }
 
 .container {
-    display: flex;
+  display: flex;
 }
 
 .col {
-    flex: 1;
+  flex: 1;
 }
 
 .col:first-child {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 p {
-	text-align: justify;
+  text-align: justify;
 }
 
 .navbar {
   background-color: black;
   /*border-radius: 30px;*/
-	position: fixed; /* Set the navbar to fixed position */
- 	top: 0; /* Position the navbar at the top of the page */
-	width: 100%;
-	z-index: 10;
+  position: fixed;
+  /* Set the navbar to fixed position */
+  top: 0;
+  /* Position the navbar at the top of the page */
+  width: 100%;
+  z-index: 10;
 }
 
 .navbar li {
-	display: flex;
+  display: flex;
   list-style: none;
   margin: 13px 20px;
-	display: inline-block;
+  display: inline-block;
 }
 
 .navbar li:first-child {
@@ -69,17 +72,17 @@ p {
 }
 
 #menu {
-  text-align:right;
-	width: 100%;
+  text-align: right;
+  width: 100%;
 }
 
 .navbar li a {
   padding: 10px 25px;
-	display: block;
+  display: block;
   text-transform: uppercase;
   text-decoration: none;
   color: white;
-	letter-spacing:.2em;
+  letter-spacing: .2em;
 }
 
 .navbar li a:hover {
@@ -87,23 +90,23 @@ p {
 }
 
 #pad {
-	margin-top: 10px;
+  margin-top: 10px;
 }
 
 #intro {
-	display: flex;
- 	justify-content: center;
- 	align-items: center;
- 	flex-direction: column;
- 	margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 #top {
-	display: flex;
- 	justify-content: center;
- 	align-items: center;
- 	flex-direction: column;
- 	margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 /* ========================================================================== */
@@ -111,60 +114,65 @@ p {
 .select-label {
   margin-right: 10px;
   font-size: 1rem;
-	align-items: center;
-	justify-content: center;
+  align-items: center;
+  justify-content: center;
 }
+
 #options {
   display: flex;
   flex: 1;
   flex-direction: row;
 }
+
 #genres {
   align-items: center;
   justify-content: center;
 }
+
 #metrics {
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-	margin-left: 5px;
+  margin-left: 5px;
 }
+
 #years {
   align-items: center;
   justify-content: center;
-	margin-left: 10px;
+  margin-left: 10px;
 }
+
 /* ========================================================================== */
 
 #part1div {
-	float: left;
-	overflow: hidden;
-	height: 700px;
-	width: 700px;
+  float: left;
+  overflow: hidden;
+  height: 700px;
+  width: 700px;
 }
 
 #tooltip {
-	text-align: center;
-	border: thick black solid;
+  text-align: center;
+  border: thick black solid;
   border-radius: 20px 10px;
-	background: #bf2e77;
-	margin-left: 1150px;
-	height: 300px;
-	width: 400px;
-	font-size: 25px;
+  background: #bf2e77;
+  margin-left: 1150px;
+  height: 300px;
+  width: 400px;
+  font-size: 25px;
 }
 
 .selected {
-	color: #fff;
+  color: #fff;
 }
 
 #part2div {
-	clear:both;
+  clear: both;
 }
 
 #plot {
-	position: absolute;
-	margin-left: 350px;
+  position: absolute;
+  margin-left: 350px;
 }
 
 .arrow-left {
@@ -172,12 +180,12 @@ p {
   height: 0;
   border-top: 200px solid transparent;
   border-bottom: 100px solid transparent;
-	z-index: 5;
+  z-index: 5;
   border-right: 250px solid #bfbdbd;
-	opacity: 0.6;
-	visibility: hidden;
-	margin-left: 210px;
-	margin-top: 25px;
+  opacity: 0.6;
+  visibility: hidden;
+  margin-left: 210px;
+  margin-top: 25px;
 }
 
 /* ========================================================================== */
@@ -187,6 +195,7 @@ p {
   padding: 0;
   max-width: 300px;
 }
+
 /* List element */
 #ranked li {
   counter-increment: index;
@@ -194,8 +203,9 @@ p {
   /* align-items: center; */
   padding: 12px 0;
   box-sizing: border-box;
-	font-size: 25px;
+  font-size: 25px;
 }
+
 /* Element counter */
 #ranked li::before {
   content: counters(index, ".");
@@ -211,13 +221,16 @@ p {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 /* Element separation */
-#ranked li + li {
-  border-top: 1px solid rgba(255,255,255,0.2);
+#ranked li+li {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 #ranked li:hover {
-	background-image: linear-gradient(to right, rgba(158, 24, 122, 0.8), rgba(150, 32, 93, 0.8));
+  background-image: linear-gradient(to right, rgba(158, 24, 122, 0.8), rgba(150, 32, 93, 0.8));
 }
+
 /* ========================================================================== */
 /* Loading animation */
 .lds-ring {
@@ -225,8 +238,9 @@ p {
   position: relative;
   width: 80px;
   height: 80px;
-	margin-top: 200px;
+  margin-top: 200px;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -239,20 +253,32 @@ p {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #fff transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
+}
+
+#cy {
+  width: 1200px;
+  height: 750px;
+  display: block;
+  background-color: #fff;
 }
