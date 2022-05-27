@@ -112,7 +112,6 @@ function StackedAreaChart(temp, {
   return Object.assign(svg.node(), {scales: {color}});
 }
 
-
 d3.csv("data/movie_dataset.csv").then(function(data) {
   genres = Array.from(new Set(data.map(element => element.genres))).sort();
 
@@ -166,7 +165,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       const currentYear = document.getElementById('yearSelect').value;
       getMovieData(currentMetric, currentGenre, currentYear);
     });
-
   metricSelect
     .selectAll('option')
     .data(rankingMetrics)
@@ -191,7 +189,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       const currentYear = document.getElementById('yearSelect').value;
       getMovieData(currentMetric, currentGenre, currentYear);
     });
-
   genreSelect
     .selectAll('option')
     .data(allGenres)
@@ -212,7 +209,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         const currentYear = document.getElementById('yearSelect').value;
         getMovieData(currentMetric, currentGenre, currentYear);
       });
-
     var yearsList = rangeOfYears(minYear, maxYear)
     yearsList.push("All")
     yearsList = yearsList.reverse()
@@ -248,7 +244,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       .style("position", "absolute")
       //.style("z-index", "10")
       .style("visibility", "hidden")
-      // .text("Nothing to show");
+      //.text("Nothing to show");
 
     const rankingList = rankingDiv
       .append('ul')
@@ -263,7 +259,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
          return d.primaryTitle;
        })
       .on("click", function(d) {
-        //console.log(d)
         // Highlight selected item in list
         d3.select(".selected").classed("selected", false);
         d3.select(this).classed("selected", true);
@@ -279,7 +274,12 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         .text("Genres: " + d.genres)
         .append('div').attr('id', 'poster');
 
-        getPoster(d.primaryTitle)
+        // Loading animation for movie poster
+        d3.select('#tooltip').append(() => createLoadingAnimation().node());
+        setTimeout(function() {
+          getPoster(d.primaryTitle);
+          d3.select('#tooltip').selectAll('.lds-ring').remove();
+        }, 500);
         return tooltip.style("visibility", "visible");
       })
 
@@ -345,21 +345,25 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
                     .text("Genres: " + d.genres)
                     .append('div').attr('id', 'poster');
 
-                    getPoster(d.primaryTitle)
+                    // Loading animation for movie poster
+                    d3.select('#tooltip').append(() => createLoadingAnimation().node());
+                    setTimeout(function() {
+                      getPoster(d.primaryTitle);
+                      d3.select('#tooltip').selectAll('.lds-ring').remove();
+                    }, 500);
                     return tooltip.style("visibility", "visible");
                   })
         rankingDiv.selectAll('.lds-ring').remove();
-      }, 1500);
+      }, 1000);
     }
 
 // =============================================================================
-
+  // Part 2: Plots
   const part2Div = d3.select('#part2div').append('h1').attr('id', 'top').text('Plots');
 
   // Stacked area chart
   const stackedDiv = part2Div.append('div').attr('id', 'stacked');
 
-  // Part 2: Plots
   const optionsDivPart2 = part2Div.append('div').attr('id', 'options');
   const metricDivPart2 = optionsDivPart2.append('div').attr('id', 'metrics');
   const genreDivPart2 = optionsDivPart2.append('div').attr('id', 'genres');
@@ -375,7 +379,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       getPlotData(currentMetric, currentGenre, svg);
       getPlotData(currentMetric, currentGenre, svg_2);
     });
-
   metricSelectPart2
     .selectAll('option')
     .data(rankingMetrics)
@@ -399,7 +402,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       const currentMetric = document.getElementById('metricSelectPart2').value;
       getPlotData(currentMetric, currentGenre, svg);
     });
-
   genreSelectPart2
     .selectAll('option')
     .data(allGenres)
@@ -482,7 +484,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     svg.append("text")
         .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
         .text("Years");
-
     let xScale = d3.scaleBand()
         .domain(rangeOfYears(minYear, maxYear))
         .padding(0.2)
@@ -565,7 +566,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
               .append("g")
               .attr("transform",
                   "translate(" + margin.left + "," + margin.top + ")");
-
+  // Genre selector for second plot
   genreDivPart2_2.append('label').attr('class', 'select-label').text('Select Genre:');
   const genreSelectPart2_2 = genreDivPart2_2
     .append('select')
@@ -575,7 +576,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       const currentMetric = document.getElementById('metricSelectPart2').value;
       getPlotData(currentMetric, currentGenre, svg_2);
     });
-
   genreSelectPart2_2
     .selectAll('option')
     .data(allGenres)
