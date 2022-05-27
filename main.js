@@ -1,7 +1,7 @@
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
 // https://observablehq.com/@d3/normalized-stacked-area-chart
-function StackedAreaChart(data, {
+function StackedAreaChart(temp, {
   x = ([x]) => x, // given d in data, returns the (ordinal) x-value
   y = ([, y]) => y, // given d in data, returns the (quantitative) y-value
   z = () => 1, // given d in data, returns the (categorical) z-value
@@ -26,14 +26,19 @@ function StackedAreaChart(data, {
   colors = d3.schemeTableau10, // an array of colors for the (z) categories
 } = {}) {
   // Compute values.
-  const X = d3.map(data, x);
-  const Y = d3.map(data, y);
-  const Z = d3.map(data, z);
+  const X = d3.map(temp, x);
+  const Y = d3.map(temp, y);
+  const Z = d3.map(temp, z);
+  console.log(X)
+  console.log(Y)
+  console.log(Z)
 
   // Compute default x- and z-domains, and unique the z-domain.
   if (xDomain === undefined) xDomain = d3.extent(X);
   if (zDomain === undefined) zDomain = Z;
   zDomain = new d3.InternSet(zDomain);
+  console.log(xDomain)
+  console.log(zDomain)
 
   // Omit any data not present in the z-domain.
   const I = d3.range(X.length).filter(i => zDomain.has(Z[i]));
@@ -50,9 +55,11 @@ function StackedAreaChart(data, {
       .offset(offset)
     (d3.rollup(I, ([i]) => i, i => X[i], i => Z[i]))
     .map(s => s.map(d => Object.assign(d, {i: d.data[1].get(s.key)})));
+  console.log(series)
 
   // Compute the default y-domain. Note: diverging stacks can be negative.
   if (yDomain === undefined) yDomain = d3.extent(series.flat(2));
+  console.log(yDomain)
 
   // Construct scales and axes.
   const xScale = xType(xDomain, xRange);
@@ -75,7 +82,8 @@ function StackedAreaChart(data, {
   svg.append("g")
     .selectAll("path")
     .data(series)
-    .join("path")
+    //.join("path")
+    .enter().append('path')
       .attr("fill", ([{i}]) => color(Z[i]))
       .attr("d", area)
     .append("title")
@@ -223,6 +231,19 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     }).slice(0, 10);
     //console.log(topData)
 
+    // Fetch movie poster from https://www.themoviedb.org/documentation/api
+    var getPoster = function(film_name) {
+        $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film_name + "&callback=?", function(json) {
+            if (json != "Nothing found.") {
+                  $('#poster').html('</p><img id="temp" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+            } else {
+                  $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?", function(json) {
+                  $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div><p>Perhaps you were looking for The Goonies?</p><img id="thePoster" src="http://image.tmdb.org/t/p/w500/' + json[0].poster_path + ' class="img-responsive" />');
+                  });
+            }
+        });
+    }
+
     var tooltip = rankingDiv.append('div').attr('id', 'tooltip')
       .style("position", "absolute")
       //.style("z-index", "10")
@@ -249,12 +270,16 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
 
         d3.selectAll('#temp').remove();
 
-        d3.select("#tooltip").append('div').attr('id', 'temp')
+        d3.select("#tooltip")
+        .append('div').attr('id', 'temp')
         .text("Average rating: " + d.averageRating)
-        .append('div', 'temp').attr('id', 'temp')
+        .append('div').attr('id', 'temp')
         .text("Year: " + d.startYear.slice(0, -2))
-        .append('div', 'temp').attr('id', 'temp')
-        .text("Genres: " + d.genres);
+        .append('div').attr('id', 'temp')
+        .text("Genres: " + d.genres)
+        .append('div').attr('id', 'poster');
+
+        getPoster(d.primaryTitle)
         return tooltip.style("visibility", "visible");
       })
 
@@ -317,11 +342,14 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
                     .append('div', 'temp').attr('id', 'temp')
                     .text("Year: " + d.startYear.slice(0, -2))
                     .append('div', 'temp').attr('id', 'temp')
-                    .text("Genres: " + d.genres);
+                    .text("Genres: " + d.genres)
+                    .append('div').attr('id', 'poster');
+
+                    getPoster(d.primaryTitle)
                     return tooltip.style("visibility", "visible");
                   })
         rankingDiv.selectAll('.lds-ring').remove();
-      }, 2000);
+      }, 1500);
     }
 
 // =============================================================================
@@ -344,7 +372,8 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     .on('change', function (event) {
       const currentGenre = document.getElementById('genreSelectPart2').value;
       const currentMetric = document.getElementById('metricSelectPart2').value;
-      getPlotData(currentMetric, currentGenre);
+      getPlotData(currentMetric, currentGenre, svg);
+      getPlotData(currentMetric, currentGenre, svg_2);
     });
 
   metricSelectPart2
@@ -368,7 +397,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     .on('change', function (event) {
       const currentGenre = document.getElementById('genreSelectPart2').value;
       const currentMetric = document.getElementById('metricSelectPart2').value;
-      getPlotData(currentMetric, currentGenre);
+      getPlotData(currentMetric, currentGenre, svg);
     });
 
   genreSelectPart2
@@ -384,19 +413,52 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   const width = 950 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
 
-  let svg = d3.select("#plot")
-              .append("svg")
-              .attr("width", width + margin.left + margin.right)
-              .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform",
-                  "translate(" + margin.left + "," + margin.top + ")");
+  // ====================================================================================================================================================
+  // Stacked Area Chart
+  test = []
+  for (var i=0; i < data.length; ++i) {
+      //console.log(data[i].genres)
+      var genreArray = data[i].genres.split(",")
+      //console.log(genreArray)
+      for (var j=0; j < genreArray.length; ++j) {
+          //var date = data[i].startYear.slice(0, -2) + "-01-01";
+          test.push({year: data[i].startYear.slice(0, -2), averageRating: +data[i].averageRating, numVotes: +data[i].numVotes, genre: genreArray[j]});
+      }
+  }
+  console.log(test)
+  test.sort()
+
+  const allKeys = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
+  'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Game-Show', 'History', 'Horror',
+  'Music', 'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
+  'Talk-Show', 'Thriller', 'War', 'Western'];
+
+  const chart = StackedAreaChart(test, {
+    x: d => +d.year,
+    y: d => +d.numVotes,
+    z: d => d.genre,
+    yLabel: "Number of votes",
+    width,
+    height: 600,
+    xType: d3.scaleLinear,
+    xDomain: rangeOfYears(minYear, maxYear),
+    yDomain: rangeOfYears(10000, 260000),
+    zDomain: allKeys
+  });
+
+  console.log(chart)
+  const svg2 = document.querySelector('svg');
+  var tag = document.createElementNS(chart, "svg");
+  svg2.appendChild(tag)
+  //stackedDiv.append("svg").appendChild(tag);
+  //document.body.appendChild(tag);
+  // ====================================================================================================================================================
 
   // Prepare data for plots
   function prepare_data(array) {
       const moviePerYear = d3.groups(array, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
       var plotData = [];
-      for(var i=0; i < moviePerYear.length; ++i) {
+      for (var i=0; i < moviePerYear.length; ++i) {
           if (moviePerYear[i][0] >= 1990) {
               let sumVotes = 0;
               let sumRating = 0;
@@ -406,11 +468,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
                   sumVotes += +moviePerYear[i][1][j].numVotes;
                   sumRating += +moviePerYear[i][1][j].averageRating;
                   count += 1;
-                  // for (g in moviePerYear[i][1][j].genres) {
-                  //     if (!genres.includes(g)) {
-                  //       genres.push(g);
-                  //     }
-                  // }
               }
               plotData.push({year: moviePerYear[i][0].slice(0, -2), meanRating: (sumRating / count), meanVotes: (sumVotes / count), count: count});
           }
@@ -418,67 +475,121 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       return plotData
   }
   var plotData = prepare_data(data)
-  console.log(plotData)
+  //console.log(plotData)
+  // ====================================================================================================================================================
+  function create_plot(svg, plot_data, metric) {
+    // x-axis label
+    svg.append("text")
+        .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
+        .text("Years");
 
-  // var newData = data.filter(function(row) {
-  //   return row['genres'].includes(genre)
-  // });
-  // var newPlotData = prepare_data(newData)
-  // const chart = StackedAreaChart(data, {
-  //   x: d => d.startYear,
-  //   y: d => d.numVotes,
-  //   z: d => d.genres,
-  //   yLabel: "Number of votes",
-  //   width,
-  //   height: 600
-  // });
-  //stackedDiv.append(chart)
+    let xScale = d3.scaleBand()
+        .domain(rangeOfYears(minYear, maxYear))
+        .padding(0.2)
+        .range([0, width]);
+    let yScale = d3.scaleLinear()
+        .domain([0, 10])
+        .range([height, 0]);
+    // y-axis label
+    if (metric === "Number of votes") {
+      yScale = d3.scaleLinear()
+          .domain([0, 200000])
+          .range([height, 0]);
+      svg.append("text")
+          .attr("transform", "rotate(270)")
+          .attr("y", - margin.left/2 - 20 )
+          .attr("x", - height/2 -60)
+          .text("Number of votes");
+    } else {
+      yScale = d3.scaleLinear()
+          .domain([0, 10])
+          .range([height, 0]);
+      svg.append("text")
+          .attr("transform", "rotate(270)")
+          .attr("y", - margin.left/2)
+          .attr("x", - height/2 -60)
+          .text("Average Rating");
+    }
 
-  // x-axis label
-  svg.append("text")
-      .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
-      .text("Years");
-  // y-axis label
-  svg.append("text")
-      .attr("transform", "rotate(270)")
-      .attr("y", - margin.left/2)
-      .attr("x", - height/2 -60)
-      .text("Average Rating");
+    svg.append("g")
+        .attr("transform","translate(0, "+height+")")
+        .call(d3.axisBottom(xScale));
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
 
-  let xScale= d3.scaleBand()
-      .domain(rangeOfYears(minYear, maxYear))
-      .padding(0.2)
-      .range([0, width]);
-  let yScale = d3.scaleLinear()
-      .domain([0, 10])
-      .range([height, 0]);
+    // Create initial barplot
+    svg.selectAll("rect")
+        .data(plot_data)
+        .enter()
+        .append("rect")
+        .attr("x", d => xScale(+(d.year)))
+        .attr("width", xScale.bandwidth())
+        .attr("fill", "#910657")
+        .attr("height", function(d) { return height - yScale(0);})
+        .attr("y", d => yScale(0))
+    // Animation
+    svg.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) {
+          if (metric === "Number of votes") {
+            return yScale(d.meanVotes);
+          } else {
+            return yScale(d.meanRating);
+          }
+        })
+        .attr("height", function(d) {
+          if (metric === "Number of votes") {
+            return Math.abs(height - yScale(d.meanVotes));
+          } else {
+            return Math.abs(height - yScale(d.meanRating));
+          }
+        })
+        .delay(function(d, i){ console.log(i); return(i*100)})
+  }
 
-  svg.append("g")
-      .attr("transform","translate(0, "+height+")")
-      .call(d3.axisBottom(xScale));
-  svg.append("g")
-      .call(d3.axisLeft(yScale));
+  let svg = d3.select("#plot")
+              .append("svg")
+              .attr("width", (width + margin.left + margin.right))
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
 
-  // Create initial barplot
-  svg.selectAll("rect")
-      .data(plotData)
-      .enter()
-      .append("rect")
-      .attr("x", d => xScale(+(d.year)))
-      .attr("width", xScale.bandwidth())
-      .attr("fill", "#910657")
-      .attr("height", function(d) { return height - yScale(0);})
-      .attr("y", d => yScale(0))
-  // Animation
-  svg.selectAll("rect")
-      .transition()
-      .duration(800)
-      .attr("y", function(d) { return yScale(d.meanRating); })
-      .attr("height", function(d) { return Math.abs(height - yScale(d.meanRating)); })
-      .delay(function(d, i){ console.log(i); return(i*100)})
+  const genreDivPart2_2 = d3.select("#plot").append('div').attr('id', 'genres');
+
+  let svg_2 = d3.select("#plot")
+              .append("svg")
+              .attr("width", (width + margin.left + margin.right))
+              .attr("height", height + margin.top + margin.bottom)
+              .append("g")
+              .attr("transform",
+                  "translate(" + margin.left + "," + margin.top + ")");
+
+  genreDivPart2_2.append('label').attr('class', 'select-label').text('Select Genre:');
+  const genreSelectPart2_2 = genreDivPart2_2
+    .append('select')
+    .attr('id', 'genreSelectPart2_2')
+    .on('change', function (event) {
+      const currentGenre = document.getElementById('genreSelectPart2_2').value;
+      const currentMetric = document.getElementById('metricSelectPart2').value;
+      getPlotData(currentMetric, currentGenre, svg_2);
+    });
+
+  genreSelectPart2_2
+    .selectAll('option')
+    .data(allGenres)
+    .enter()
+    .append('option')
+    .text(function (d) {
+      return d;
+    })
+
+  create_plot(svg, plotData, "Average Rating")
+  create_plot(svg_2, plotData, "Average Rating")
 
   // UPDATE PLOT
-  const getPlotData = async (metric, genre) => {
+  const getPlotData = async (metric, genre, svg) => {
       svg.selectAll("rect").remove()
       svg.selectAll("text").remove()
 
@@ -502,72 +613,12 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       }
       console.log(newPlotData)
 
-      // x-axis label
-      svg.append("text")
-          .attr("transform", "translate(" + ((width/2)-60) + " ," + (height + margin.top) + ")")
-          .text("Years");
-      // let xScale= d3.scaleBand()
-      //     .domain(rangeOfYears(minYear, maxYear))
-      //     .padding(0.2)
-      //     .range([0, width]);
-      if (metric === "Number of votes") {
-        yScale = d3.scaleLinear()
-            .domain([0, 200000])
-            .range([height, 0]);
-        svg.append("text")
-            .attr("transform", "rotate(270)")
-            .attr("y", - margin.left/2 - 20 )
-            .attr("x", - height/2 -60)
-            .text("Number of votes");
-      } else {
-        yScale = d3.scaleLinear()
-            .domain([0, 10])
-            .range([height, 0]);
-        svg.append("text")
-            .attr("transform", "rotate(270)")
-            .attr("y", - margin.left/2)
-            .attr("x", - height/2 -60)
-            .text("Average Rating");
-      }
-      svg.append("g")
-          .attr("transform","translate(0, "+height+")")
-          .call(d3.axisBottom(xScale));
-      svg.append("g")
-          .call(d3.axisLeft(yScale));
-
-      svg.selectAll("rect")
-          .data(newPlotData)
-          .enter()
-          .append("rect")
-          .attr("x", d => xScale(+(d.year)))
-          .attr("width", xScale.bandwidth())
-          .attr("fill", "#910657")
-          .attr("height", function(d) { return height - yScale(0); })
-          .attr("y", d => yScale(0))
-      // Animation
-      svg.selectAll("rect")
-          .transition()
-          .duration(800)
-          .attr("y", function(d) {
-            if (metric === "Number of votes") {
-              return yScale(d.meanVotes);
-            } else {
-              return yScale(d.meanRating);
-            }
-          })
-          .attr("height", function(d) {
-            if (metric === "Number of votes") {
-              return Math.abs(height - yScale(d.meanVotes));
-            } else {
-              return Math.abs(height - yScale(d.meanRating));
-            }
-          })
-          .delay(function(d, i){ console.log(i); return(i*100)})
+      create_plot(svg, newPlotData, metric)
   }
 
-// =============================================================================
+  // =============================================================================
   // Part 3
-  const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
+  //const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
 
 
 });

@@ -7,13 +7,14 @@
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="d3.min.js"></script>
     <script src="main.js"></script>
-    <script type="module">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script type="module">
 
       import * as Plot from "https://cdn.skypack.dev/@observablehq/plot@0.4";
 
       document.body.append(Plot.plot(options));
 
-    </script>
+    </script> -->
 
 
     <title>TeamSalt Viz</title>
@@ -51,7 +52,9 @@
   <div id="part2div">
     <!-- <h1>Part 2</h1> -->
 
-    <script>
+    <svg></svg>
+
+    <!-- <script>
 
     // set the dimensions and margins of the graph
     const margin = {top: 60, right: 230, bottom: 50, left: 50},
@@ -86,10 +89,22 @@
         .domain(keys)
         .range(d3.schemeSet2);
 
-      //stack the data?
+      test = []
+      for (var i=0; i < 1000; ++i) {
+          //console.log(data[i].genres)
+          var genreArray = data[i].genres.split(",")
+          //console.log(genreArray)
+          for (var j=0; j < genreArray.length; ++j) {
+              test.push({year: data[i].startYear.slice(0, -2), averageRating: data[i].averageRating, numVotes: data[i].numVotes, genre: genreArray[j]});
+          }
+      }
+      //console.log(test)
+
+      //stack the data
       const stackedData = d3.stack()
         .keys(keys)
-        (data)
+        (test)
+      //console.log(stackedData)
 
       //////////
       // AXIS //
@@ -97,7 +112,7 @@
 
       // Add X axis
       const x = d3.scaleLinear()
-        .domain(d3.extent(data, function(d) { return d.startYear; }))
+        .domain(d3.extent(test, function(d) { return d.year; }))
         .range([ 0, width ]);
       const xAxis = svg.append("g")
         .attr("transform", `translate(0, ${height})`)
@@ -149,7 +164,7 @@
 
       // Area generator
       const area = d3.area()
-        .x(function(d) { return x(d.data.startYear); })
+        .x(function(d) { return x(d.data.year); })
         .y0(function(d) { return y(d[0]); })
         .y1(function(d) { return y(d[1]); });
 
@@ -157,7 +172,8 @@
       areaChart
         .selectAll("mylayers")
         .data(stackedData)
-        .join("path")
+        //.join("path")
+        .enter().append('path')
           .attr("class", function(d) { return "myArea " + d.key })
           .style("fill", function(d) { return color(d.key); })
           .attr("d", area)
@@ -172,14 +188,14 @@
       function idled() { idleTimeout = null; }
 
       // A function that update the chart for given boundaries
-      function updateChart(event,d) {
+      function updateChart(event, d) {
 
         extent = event.selection
 
         // If no selection, back to initial coordinate. Otherwise, update X axis domain
         if(!extent){
           if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-          x.domain(d3.extent(data, function(d) { return d.startYear; }))
+          x.domain(d3.extent(test, function(d) { return d.year; }))
         }else{
           x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
           areaChart.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
@@ -198,7 +214,7 @@
         //////////
 
         // What to do when one group is hovered
-        const highlight = function(event,d){
+        const highlight = function(event, d){
           // reduce opacity of all groups
           d3.selectAll(".myArea").style("opacity", .1)
           // expect the one that is hovered
@@ -218,7 +234,8 @@
         const size = 20
         svg.selectAll("myrect")
           .data(keys)
-          .join("rect")
+          //.join("rect")
+          .enter().append('rect')
             .attr("x", 400)
             .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
             .attr("width", size)
@@ -230,7 +247,8 @@
         // Add one dot in the legend for each name.
         svg.selectAll("mylabels")
           .data(keys)
-          .join("text")
+          //.join("text")
+          .enter().append('text')
             .attr("x", 400 + size*1.2)
             .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
             .style("fill", function(d){ return color(d)})
@@ -241,12 +259,14 @@
             .on("mouseleave", noHighlight)
 
     })
-    </script>
+    </script> -->
   </div>
 
   <div id="part2plot" class="container">
     <div id="proj_img" class="col">
+      <!-- Image from: https://pixabay.com/illustrations/movie-projector-film-projector-596011/ -->
       <img src="img/projector3.png"/ width = "300" height = "300">
+
     </div>
     <div class="arrow-left"></div>
 
@@ -258,7 +278,7 @@
 
 
 <div id="part3div">
-  <h1>Part 3</h1>
+  <!-- <h1>Part 3</h1> -->
 
 </div>
 
