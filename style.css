@@ -29,14 +29,14 @@ body {
 .arrow-left {
   width: 0;
   height: 0;
-  border-top: 200px solid transparent;
-  border-bottom: 100px solid transparent;
+  border-top: 400px solid transparent;
+  border-bottom: 300px solid transparent;
 	z-index: 5;
   border-right: 250px solid #bfbdbd;
 	opacity: 0.6;
 	visibility: hidden;
-	margin-left: 210px;
-	margin-top: 250px;
+	margin-left: 220px;
+	margin-top: 45px;
 }
 
 .container {
