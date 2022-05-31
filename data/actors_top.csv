@@ -1,0 +1,21 @@
+nconst,primaryName,birthYear,deathYear,primaryProfession,knownForTitles,numVotes
+nm0504226,Andrew Lesnie,1956.0,2015.0,"cinematographer,camera_department,actor","['tt0167261', 'tt0360717', 'tt0167260', 'tt0120737']",5568009.0
+nm0721615,Don Reynolds,1937.0,2019.0,"actor,miscellaneous","['tt0120737', 'tt0167260', 'tt0035423', 'tt0167261']",5236632.0
+nm0000453,Ian Holm,1931.0,2020.0,"actor,soundtrack,animation_department","['tt0120737', 'tt0120681', 'tt0382932', 'tt0167260']",4405417.0
+nm0652906,Johnny Otis,1921.0,2012.0,"soundtrack,actor","['tt0111161', 'tt0088763', 'tt0790636', 'tt0117381']",4404535.0
+nm0001190,David Prowse,1935.0,2020.0,"actor,miscellaneous","['tt0066921', 'tt0076759', 'tt0080684', 'tt0086190']",4379166.0
+nm0508742,Brian Libby,1949.0,2018.0,actor,"['tt0884328', 'tt0111161', 'tt0120689', 'tt0118571']",4308883.0
+nm0026428,Bob Anderson,1922.0,2012.0,"stunts,miscellaneous,actor","['tt0120737', 'tt0120746', 'tt0086190', 'tt0080684']",4228465.0
+nm0562679,Peter Mayhew,1944.0,2019.0,"actor,miscellaneous","['tt0080684', 'tt0121766', 'tt0076759', 'tt2488496']",4221999.0
+nm0866766,Alan Tomkins,1939.0,2020.0,"art_director,art_department,actor","['tt0372784', 'tt0120815', 'tt0102798', 'tt0080684']",4187528.0
+nm0000402,Carrie Fisher,1956.0,2016.0,"actress,miscellaneous,soundtrack","['tt0080684', 'tt0076759', 'tt0086190', 'tt2527336']",4181151.0
+nm0154459,Mark Chavarria,1968.0,2017.0,"stunts,actor,camera_department","['tt1375666', 'tt0387808', 'tt0371746', 'tt3315342']",4155369.0
+nm0834475,Daniel C. Striepeke,1930.0,2019.0,"make_up_department,actor,writer","['tt0120815', 'tt0162222', 'tt0109830', 'tt0257044']",4155175.0
+nm0000489,Christopher Lee,1922.0,2015.0,"actor,soundtrack,producer","['tt0070917', 'tt0167261', 'tt0121765', 'tt0120737']",4149742.0
+nm0000592,Pete Postlethwaite,1946.0,2011.0,"actor,producer","['tt0840361', 'tt0114814', 'tt1375666', 'tt0119567']",4095398.0
+nm0105010,Tony Brandt,1930.0,2009.0,"assistant_director,miscellaneous,actor","['tt0068646', 'tt0071562', 'tt0078788', 'tt0067140']",3673825.0
+nm0397102,Alan Howard,1937.0,2015.0,actor,"['tt0055597', 'tt0097108', 'tt0120737', 'tt0167260']",3600005.0
+nm0032370,Noel Appleby,1933.0,2007.0,actor,"['tt0100852', 'tt0167260', 'tt0095709', 'tt0120737']",3560220.0
+nm1569276,Chadwick Boseman,1976.0,2020.0,"actor,producer,writer","['tt4154756', 'tt4154796', 'tt3498820', 'tt1825683']",3494686.0
+nm0681191,Édith Piaf,1915.0,1963.0,"soundtrack,actress,music_department","['tt1270798', 'tt1375666', 'tt3640424', 'tt1517451']",3455765.0
+nm0001474,Tom Lister Jr.,1958.0,2020.0,"actor,producer","['tt0119116', 'tt0113118', 'tt0468569', 'tt0119396']",3445546.0
