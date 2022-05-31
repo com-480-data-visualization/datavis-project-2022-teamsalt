@@ -19,7 +19,7 @@ body {
 
 #proj_img {
 	background-color: rgba(0, 0, 0, 0);
-	margin-top: 250px;
+	margin-top: 50px;
 	max-width: 50%;
 	/*height: auto;*/
 	position: absolute;
@@ -29,14 +29,14 @@ body {
 .arrow-left {
   width: 0;
   height: 0;
-  border-top: 400px solid transparent;
-  border-bottom: 300px solid transparent;
+  border-top: 200px solid transparent;
+  border-bottom: 80px solid transparent;
 	z-index: 5;
   border-right: 250px solid #bfbdbd;
 	opacity: 0.6;
 	visibility: hidden;
 	margin-left: 220px;
-	margin-top: 45px;
+	margin-top: 40px;
 }
 
 .container {
@@ -61,7 +61,7 @@ p {
 	position: fixed; /* Set the navbar to fixed position */
  	top: 0; /* Position the navbar at the top of the page */
 	width: 100%;
-	z-index: 10;
+	z-index: 12;
 }
 
 .navbar li {
@@ -118,6 +118,12 @@ p {
  	flex-direction: column;
  	margin-top: 10px;
 }
+/* ========================================================================== */
+/* Stacked area chart */
+#stacked {
+	margin-left: 200px;
+}
+
 
 /* ========================================================================== */
 /* DROPDOWN SELECTION PART 1 */
