@@ -105,7 +105,7 @@ function StackedAreaChart(data, {
 }
 
 
-d3.csv("data/movie_dataset.csv").then(function (data) {
+d3.csv("data/movie_dataset.csv").then(function(data) {
     genres = Array.from(new Set(data.map(element => element.genres))).sort();
 
     const asyncForEach = async (array, callback) => {
@@ -152,7 +152,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
     const metricSelect = metricDiv
         .append('select')
         .attr('id', 'metricSelect')
-        .on('change', function (event) {
+        .on('change', function(event) {
             const currentGenre = document.getElementById('genreSelect').value;
             const currentMetric = document.getElementById('metricSelect').value;
             const currentYear = document.getElementById('yearSelect').value;
@@ -164,7 +164,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .data(rankingMetrics)
         .enter()
         .append('option')
-        .text(function (d) {
+        .text(function(d) {
             if (d === "averageRating") {
                 return "Average Rating"
             } else {
@@ -177,7 +177,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
     const genreSelect = genreDiv
         .append('select')
         .attr('id', 'genreSelect')
-        .on('change', function (event) {
+        .on('change', function(event) {
             const currentGenre = document.getElementById('genreSelect').value;
             const currentMetric = document.getElementById('metricSelect').value;
             const currentYear = document.getElementById('yearSelect').value;
@@ -189,7 +189,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .data(allGenres)
         .enter()
         .append('option')
-        .text(function (d) {
+        .text(function(d) {
             return d;
         })
 
@@ -198,7 +198,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
     const yearSelect = yearDiv
         .append('select')
         .attr('id', 'yearSelect')
-        .on('change', function (event) {
+        .on('change', function(event) {
             const currentGenre = document.getElementById('genreSelect').value;
             const currentMetric = document.getElementById('metricSelect').value;
             const currentYear = document.getElementById('yearSelect').value;
@@ -213,12 +213,12 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .data(yearsList)
         .enter()
         .append('option')
-        .text(function (d) {
+        .text(function(d) {
             return d;
         })
 
     // Create initial ranking (average rating, any genres, any year)
-    var topData = data.sort(function (a, b) {
+    var topData = data.sort(function(a, b) {
         return d3.descending(+a.averageRating, +b.averageRating);
     }).slice(0, 10);
     //console.log(topData)
@@ -238,10 +238,10 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .enter()
         .append('li')
         .attr('id', 'ranked')
-        .text(function (d) {
+        .text(function(d) {
             return d.primaryTitle;
         })
-        .on("click", function (d) {
+        .on("click", function(d) {
             //console.log(d)
             // Highlight selected item in list
             d3.select(".selected").classed("selected", false);
@@ -265,13 +265,13 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         d3.select("#tooltip").style("visibility", "hidden")
         // Add loading animation
         rankingDiv.append(() => createLoadingAnimation().node());
-        setTimeout(function () {
+        setTimeout(function() {
             // Compute new ranking
             // Treat Years
             if (year == 'All') {
                 var byYears = data;
             } else {
-                var byYears = data.filter(function (row) {
+                var byYears = data.filter(function(row) {
                     return row['startYear'].slice(0, -2) == year
                 });
             }
@@ -279,12 +279,12 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
             if (genre === 'Any') {
                 var byGenre = byYears;
             } else {
-                var byGenre = byYears.filter(function (row) {
+                var byGenre = byYears.filter(function(row) {
                     return row['genres'].includes(genre)
                 });
             }
             // Treat Metric
-            var newTopData = byGenre.sort(function (a, b) {
+            var newTopData = byGenre.sort(function(a, b) {
                 if (metric === "Number of votes") {
                     return d3.descending(+a.numVotes, +b.numVotes);
                 } else {
@@ -302,10 +302,10 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
                 .append('li')
                 //.attr('onmouseover', 'hover(this)')
                 .attr('id', 'ranked')
-                .text(function (d) {
+                .text(function(d) {
                     return d.primaryTitle;
                 })
-                .on("click", function (d) {
+                .on("click", function(d) {
                     // Highlight selected item in list
                     d3.select(".selected").classed("selected", false);
                     d3.select(this).classed("selected", true);
@@ -341,7 +341,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
     const metricSelectPart2 = metricDivPart2
         .append('select')
         .attr('id', 'metricSelectPart2')
-        .on('change', function (event) {
+        .on('change', function(event) {
             const currentGenre = document.getElementById('genreSelectPart2').value;
             const currentMetric = document.getElementById('metricSelectPart2').value;
             getPlotData(currentMetric, currentGenre);
@@ -352,7 +352,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .data(rankingMetrics)
         .enter()
         .append('option')
-        .text(function (d) {
+        .text(function(d) {
             if (d === "averageRating") {
                 return "Average Rating"
             } else {
@@ -365,7 +365,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
     const genreSelectPart2 = genreDivPart2
         .append('select')
         .attr('id', 'genreSelectPart2')
-        .on('change', function (event) {
+        .on('change', function(event) {
             const currentGenre = document.getElementById('genreSelectPart2').value;
             const currentMetric = document.getElementById('metricSelectPart2').value;
             getPlotData(currentMetric, currentGenre);
@@ -376,7 +376,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .data(allGenres)
         .enter()
         .append('option')
-        .text(function (d) {
+        .text(function(d) {
             return d;
         })
 
@@ -467,15 +467,15 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         .attr("x", d => xScale(+(d.year)))
         .attr("width", xScale.bandwidth())
         .attr("fill", "#910657")
-        .attr("height", function (d) { return height - yScale(0); })
+        .attr("height", function(d) { return height - yScale(0); })
         .attr("y", d => yScale(0))
     // Animation
     svg.selectAll("rect")
         .transition()
         .duration(800)
-        .attr("y", function (d) { return yScale(d.meanRating); })
-        .attr("height", function (d) { return Math.abs(height - yScale(d.meanRating)); })
-        .delay(function (d, i) { /*console.log(i); */ return (i * 100) })
+        .attr("y", function(d) { return yScale(d.meanRating); })
+        .attr("height", function(d) { return Math.abs(height - yScale(d.meanRating)); })
+        .delay(function(d, i) { /*console.log(i); */ return (i * 100) })
 
     // UPDATE PLOT
     const getPlotData = async (metric, genre) => {
@@ -495,7 +495,7 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
         if (genre === 'Any') {
             var newPlotData = plotData;
         } else {
-            var newData = data.filter(function (row) {
+            var newData = data.filter(function(row) {
                 return row['genres'].includes(genre)
             });
             var newPlotData = prepare_data(newData)
@@ -542,95 +542,58 @@ d3.csv("data/movie_dataset.csv").then(function (data) {
             .attr("x", d => xScale(+(d.year)))
             .attr("width", xScale.bandwidth())
             .attr("fill", "#910657")
-            .attr("height", function (d) { return height - yScale(0); })
+            .attr("height", function(d) { return height - yScale(0); })
             .attr("y", d => yScale(0))
         // Animation
         svg.selectAll("rect")
             .transition()
             .duration(800)
-            .attr("y", function (d) {
+            .attr("y", function(d) {
                 if (metric === "Number of votes") {
                     return yScale(d.meanVotes);
                 } else {
                     return yScale(d.meanRating);
                 }
             })
-            .attr("height", function (d) {
+            .attr("height", function(d) {
                 if (metric === "Number of votes") {
                     return Math.abs(height - yScale(d.meanVotes));
                 } else {
                     return Math.abs(height - yScale(d.meanRating));
                 }
             })
-            .delay(function (d, i) { /* console.log(i); */ return (i * 100) })
+            .delay(function(d, i) { /* console.log(i); */ return (i * 100) })
     }
 
     // =============================================================================
     // Part 3
 });
 
-d3.csv("data/actor_dataset.csv").then((actor_data) => {
-    d3.csv("data/movie_dataset.csv").then((movie_data) => {
-        // console.log(movie_data)
-        // console.log(actor_data)
-
-        console.log(actor_data.length);
-        const actor_popularities = actor_data
-            .map((actor) => {
-                const titles = actor.knownForTitles;
-                const score = Array(titles)
-                    .reduce((num, title_tconst) => {
-                        const found_title = movie_data.find((movie) => {// this is bad but it works
-                            return movie.tconst === title_tconst
-                        });
-                        // console.log(found_title);
-                        let num_votes = 0;
-                        if (found_title !== undefined) {
-                            num_votes = parseInt(found_title.numVotes);
-                        }
-                        return num + num_votes
-                    }, 0)
-                // console.log(score);
-                if (score != 0) {
-                    return { actor: actor, score: score }
-                }
-            })
-            .filter((elem) => elem !== undefined);
-        console.log(actor_popularities)
-        const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
-
-        let cy = cytoscape({
+{
+    Promise.all([d3.csv("data/actors_top.csv"), d3.csv("data/edge_list.csv")]).then((values) => {
+        let actor_data = values[0];
+        let edge_list = values[1];
+        cy = cytoscape({
             container: document.getElementById("cy"),
-
-            style: [ // the stylesheet for the graph
-                {
-                    selector: 'node',
-                    style: {
-                        'background-color': '#666',
-                        'label': 'data(primary_name)'
-                    }
-                },
-
-                {
-                    selector: 'edge',
-                    style: {
-                        'width': 3,
-                        'line-color': '#ccc',
-                        'target-arrow-color': '#ccc',
-                        'target-arrow-shape': 'triangle',
-                        'curve-style': 'bezier'
-                    }
-                }
-            ],
-
-            layout: {
-                name: 'random',
+            layout: { name: "grid" }
+        });
+        // Add the nodes
+        cy.add(Array.from(actor_data.map((actor) => {
+            return {
+                group: "nodes",
+                data: { id: actor["nconst"], primaryName: actor["primaryName"] },
+                position: { x: 200, y: 200 }
             }
-        })
-
-        actor_data.slice(0, 50).map((d) => { cy.add({ group: "nodes", data: { primary_name: d.primaryName } }) });
+        })));
+        // Add the edges
+        cy.add(Array.from(edge_list.map((edge) => {
+            return {
+                group: "edges",
+                data: { source: edge["src"], target: edge["dst"] }
+            }
+        })));
     })
-})
+}
 
 function whenDocumentLoaded(action) {
     if (document.readyState === "loading") {
