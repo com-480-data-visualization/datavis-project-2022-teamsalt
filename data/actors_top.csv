@@ -1,0 +1,121 @@
+nconst,primaryName,birthYear,deathYear,primaryProfession,knownForTitles,numVotes
+nm0504226,Andrew Lesnie,1956.0,2015.0,"cinematographer,camera_department,actor","['tt0167261', 'tt0360717', 'tt0167260', 'tt0120737']",5568009.0
+nm0721615,Don Reynolds,1937.0,2019.0,"actor,miscellaneous","['tt0120737', 'tt0167260', 'tt0035423', 'tt0167261']",5236632.0
+nm0000453,Ian Holm,1931.0,2020.0,"actor,soundtrack,animation_department","['tt0120737', 'tt0120681', 'tt0382932', 'tt0167260']",4405417.0
+nm0652906,Johnny Otis,1921.0,2012.0,"soundtrack,actor","['tt0111161', 'tt0088763', 'tt0790636', 'tt0117381']",4404535.0
+nm0001190,David Prowse,1935.0,2020.0,"actor,miscellaneous","['tt0066921', 'tt0076759', 'tt0080684', 'tt0086190']",4379166.0
+nm0508742,Brian Libby,1949.0,2018.0,actor,"['tt0884328', 'tt0111161', 'tt0120689', 'tt0118571']",4308883.0
+nm0026428,Bob Anderson,1922.0,2012.0,"stunts,miscellaneous,actor","['tt0120737', 'tt0120746', 'tt0086190', 'tt0080684']",4228465.0
+nm0562679,Peter Mayhew,1944.0,2019.0,"actor,miscellaneous","['tt0080684', 'tt0121766', 'tt0076759', 'tt2488496']",4221999.0
+nm0866766,Alan Tomkins,1939.0,2020.0,"art_director,art_department,actor","['tt0372784', 'tt0120815', 'tt0102798', 'tt0080684']",4187528.0
+nm0000402,Carrie Fisher,1956.0,2016.0,"actress,miscellaneous,soundtrack","['tt0080684', 'tt0076759', 'tt0086190', 'tt2527336']",4181151.0
+nm0154459,Mark Chavarria,1968.0,2017.0,"stunts,actor,camera_department","['tt1375666', 'tt0387808', 'tt0371746', 'tt3315342']",4155369.0
+nm0834475,Daniel C. Striepeke,1930.0,2019.0,"make_up_department,actor,writer","['tt0120815', 'tt0162222', 'tt0109830', 'tt0257044']",4155175.0
+nm0000489,Christopher Lee,1922.0,2015.0,"actor,soundtrack,producer","['tt0070917', 'tt0167261', 'tt0121765', 'tt0120737']",4149742.0
+nm0000592,Pete Postlethwaite,1946.0,2011.0,"actor,producer","['tt0840361', 'tt0114814', 'tt1375666', 'tt0119567']",4095398.0
+nm0105010,Tony Brandt,1930.0,2009.0,"assistant_director,miscellaneous,actor","['tt0068646', 'tt0071562', 'tt0078788', 'tt0067140']",3673825.0
+nm0397102,Alan Howard,1937.0,2015.0,actor,"['tt0055597', 'tt0097108', 'tt0120737', 'tt0167260']",3600005.0
+nm0032370,Noel Appleby,1933.0,2007.0,actor,"['tt0100852', 'tt0167260', 'tt0095709', 'tt0120737']",3560220.0
+nm1569276,Chadwick Boseman,1976.0,2020.0,"actor,producer,writer","['tt4154756', 'tt4154796', 'tt3498820', 'tt1825683']",3494686.0
+nm0681191,Édith Piaf,1915.0,1963.0,"soundtrack,actress,music_department","['tt1270798', 'tt1375666', 'tt3640424', 'tt1517451']",3455765.0
+nm0001474,Tom Lister Jr.,1958.0,2020.0,"actor,producer","['tt0119116', 'tt0113118', 'tt0468569', 'tt0119396']",3445546.0
+nm0692446,Richard Portman,1934.0,2017.0,"sound_department,actor","['tt0068646', 'tt0073440', 'tt0076759', 'tt0077416']",3441333.0
+nm0005132,Heath Ledger,1979.0,2008.0,"actor,director,soundtrack","['tt0388795', 'tt0183790', 'tt0147800', 'tt0468569']",3392940.0
+nm0001030,John Cazale,1935.0,1978.0,"actor,cinematographer,editor","['tt0071562', 'tt0068646', 'tt0072890', 'tt0071360']",3352811.0
+nm0109785,Brent Briscoe,1961.0,2017.0,"actor,writer","['tt0120324', 'tt0120689', 'tt0166924', 'tt1345836']",3304770.0
+nm1634811,Jimmy Rich,1968.0,2021.0,"miscellaneous,transportation_department,actor","['tt0988045', 'tt0371746', 'tt2250912', 'tt4154796']",3292715.0
+nm0120116,Jeremy Bulloch,1945.0,2020.0,actor,"['tt0086190', 'tt0121766', 'tt0080684', 'tt0086034']",3121944.0
+nm0188321,Jim Croce,1943.0,1973.0,"soundtrack,actor,music_department","['tt1853728', 'tt6806448', 'tt1877832', 'tt3315342']",3105496.0
+nm0416548,Harry James,1916.0,1983.0,"soundtrack,actor,music_department","['tt0242653', 'tt0133093', 'tt0119174', 'tt0081398']",3077711.0
+nm0001820,Abe Vigoda,1921.0,2016.0,actor,"['tt0106364', 'tt0119215', 'tt0068646', 'tt0071562']",3070315.0
+nm0390507,Billie Holiday,1915.0,1959.0,"soundtrack,actress,music_department","['tt0114369', 'tt0084787', 'tt0409459', 'tt0181689']",3059172.0
+nm0706551,Gerome Ragni,1935.0,1991.0,"soundtrack,actor,composer","['tt0109830', 'tt0405422', 'tt0079261', 'tt0443706']",2964340.0
+nm0094416,Khan Bonfils,1972.0,2015.0,actor,"['tt1074638', 'tt0346156', 'tt0372784', 'tt0120915']",2959070.0
+nm0390227,Larry Holden,1961.0,2011.0,"actor,director,producer","['tt0372784', 'tt0408019', 'tt0209144', 'tt0278504']",2907751.0
+nm0526964,Diana R. Lupo,1970.0,2015.0,"stunts,actress","['tt1375666', 'tt0401729', 'tt0120461', 'tt0453467']",2905215.0
+nm0352132,Trevor Habberstad,1989.0,2017.0,"stunts,actor","['tt1211837', 'tt1270798', 'tt1300854', 'tt1877832']",2879660.0
+nm0701023,Jack Purvis,1937.0,1997.0,"actor,special_effects,soundtrack","['tt0076759', 'tt0080684', 'tt0088846', 'tt0081633']",2818026.0
+nm0798685,Dorothy Silver,1929.0,2021.0,actress,"['tt0758752', 'tt2048824', 'tt0111161', 'tt2091473']",2807476.0
+nm0180225,Chris Cornell,1964.0,2017.0,"soundtrack,actor,composer","['tt0770828', 'tt1586752', 'tt0381061', 'tt0848228']",2803612.0
+nm0630003,Brian Nickels,1965.0,2020.0,"stunts,actor","['tt1201607', 'tt1074638', 'tt0451279', 'tt0440963']",2780461.0
+nm0858504,B.J. Thomas,1942.0,2021.0,"soundtrack,actor","['tt0316654', 'tt0117723', 'tt0109830', 'tt0305357']",2774304.0
+nm0224701,Peter Diamond,1929.0,2004.0,"stunts,actor,assistant_director","['tt0076759', 'tt0091203', 'tt0094074', 'tt0080684']",2738097.0
+nm0572229,Malcolm McLaren,1946.0,2010.0,"soundtrack,composer,actor","['tt0080813', 'tt1386697', 'tt0993846', 'tt0378194']",2734596.0
+nm0160690,George Christy,1927.0,2020.0,actor,"['tt0114069', 'tt0095016', 'tt0114369', 'tt0100403']",2714529.0
+nm0569680,Mickie McGowan,1938.0,2022.0,"actress,casting_department,miscellaneous","['tt1049413', 'tt0119116', 'tt0120623', 'tt0114709']",2712032.0
+nm0574342,Glenn McQueen,1960.0,2002.0,"animation_department,director,actor","['tt0198781', 'tt0120363', 'tt0114709', 'tt0120623']",2683945.0
+nm0393853,William Hootkins,1948.0,2005.0,"actor,miscellaneous","['tt0096895', 'tt0082971', 'tt0094074', 'tt0076759']",2669819.0
+nm0573328,Stephenie McMillan,1942.0,2013.0,"set_decorator,art_department,actress","['tt0241527', 'tt0417741', 'tt0373889', 'tt1201607']",2669811.0
+nm0498278,Stan Lee,1922.0,2018.0,"producer,writer,actor","['tt1211837', 'tt3896198', 'tt1825683', 'tt2250912']",2666567.0
+nm0830361,Dick Stilwell,1943.0,2002.0,actor,"['tt0109830', 'tt0119488', 'tt0110442', 'tt0107798']",2661832.0
+nm0003817,Michael Clarke Duncan,1957.0,2012.0,"actor,soundtrack,producer","['tt0120689', 'tt0401792', 'tt0133152', 'tt0120591']",2642459.0
+nm0000008,Marlon Brando,1924.0,2004.0,"actor,soundtrack,director","['tt0078788', 'tt0047296', 'tt0070849', 'tt0068646']",2621294.0
+nm0926235,James Whitmore,1921.0,2009.0,"actor,soundtrack","['tt0111161', 'tt0042208', 'tt0041163', 'tt0073053']",2603004.0
+nm0450287,Alan R. Kessler,1946.0,2011.0,actor,['tt0111161'],2569002.0
+nm0862645,Gary Ticehurst,1950.0,2011.0,"miscellaneous,actor,camera_department","['tt0234215', 'tt0133093', 'tt0382992', 'tt0770752']",2563902.0
+nm0178512,J. Fred Coots,1897.0,1985.0,"soundtrack,music_department,actor","['tt0362227', 'tt0411477', 'tt0112579', 'tt0068646']",2560238.0
+nm0254153,Duke Ellington,1899.0,1974.0,"soundtrack,music_department,actor","['tt0120184', 'tt0052561', 'tt0133093', 'tt0181689']",2557773.0
+nm0539224,Jon Maldonado,1960.0,2018.0,"stunts,actor","['tt0088936', 'tt0089348', 'tt0087777', 'tt0468569']",2552934.0
+nm0326512,Steve Golin,1955.0,2019.0,"producer,actor","['tt0120601', 'tt1663202', 'tt0338013', 'tt1895587']",2534455.0
+nm3060034,Lanny Lutz,1942.0,2021.0,actor,"['tt0468569', 'tt1684225']",2534230.0
+nm0000388,R. Lee Ermey,1944.0,2018.0,"actor,miscellaneous,producer","['tt0093058', 'tt0324216', 'tt0114369', 'tt0095647']",2534082.0
+nm0701229,Marilyn Putnam,1925.0,2002.0,"costume_department,actress,costume_designer","['tt0068646', 'tt0074958', 'tt0081398', 'tt0075686']",2531336.0
+nm0131565,Earl Cameron,1917.0,2020.0,actor,"['tt0074896', 'tt0059800', 'tt1375666', 'tt0373926']",2522436.0
+nm0499270,Dave Legeno,1963.0,2014.0,actor,"['tt1735898', 'tt0208092', 'tt1201607', 'tt0417741']",2481411.0
+nm0047549,David Bailie,1937.0,2021.0,actor,"['tt0449088', 'tt0383574', 'tt0325980', 'tt4003440']",2465347.0
+nm0388178,Johnny Hodges,1907.0,1970.0,"soundtrack,music_department,actor","['tt0133093', 'tt0117802', 'tt0242653', 'tt0308383']",2464020.0
+nm0465745,Arnold Kopelson,1935.0,2018.0,"producer,miscellaneous,actor","['tt0114369', 'tt0106977', 'tt0106856', 'tt0091763']",2452600.0
+nm0087433,Ralph Blane,1914.0,1995.0,"soundtrack,music_department,actor","['tt0068646', 'tt0037059', 'tt0257756', 'tt0369610']",2452263.0
+nm0571609,Scott McKenzie,1939.0,2012.0,"soundtrack,actor","['tt8110232', 'tt0117500', 'tt0109830', 'tt0094889']",2443844.0
+nm0287825,Gloria Foster,1933.0,2001.0,actress,"['tt0133093', 'tt0234215', 'tt0068907', 'tt0093405']",2440106.0
+nm0050246,Marty Balin,1942.0,2018.0,"soundtrack,actor","['tt4196848', 'tt1655441', 'tt0109830', 'tt0479884']",2426637.0
+nm0730570,Bill Roberson,1958.0,2017.0,"actor,stunts","['tt0129290', 'tt0109830', 'tt0187393', 'tt0379865']",2394881.0
+nm0361363,Rusty Hanson,1966.0,2006.0,"stunts,actor","['tt0107290', 'tt0116705', 'tt0117665', 'tt0120338']",2385788.0
+nm0780409,Charles Seabrook,1956.0,2001.0,"camera_department,actor","['tt0146984', 'tt0112281', 'tt0109830', 'tt0256380']",2384324.0
+nm0001533,Meat Loaf,1947.0,2022.0,"actor,soundtrack,producer","['tt0073629', 'tt0227984', 'tt0105793', 'tt0137523']",2371848.0
+nm0001330,Sterling Hayden,1916.0,1986.0,"actor,writer,soundtrack","['tt0057012', 'tt0068646', 'tt0070334', 'tt0049406']",2365326.0
+nm0712341,Elsa Raven,1929.0,2020.0,"actress,miscellaneous","['tt0088763', 'tt0078767', 'tt0086491', 'tt0120338']",2356883.0
+nm1131568,Jack King,1903.0,1943.0,"soundtrack,music_department,actor","['tt0021106', 'tt0109830', 'tt0338751', 'tt0021232']",2337126.0
+nm0732209,Leo Robin,1900.0,1984.0,"soundtrack,music_department,actor","['tt0109830', 'tt0071315', 'tt0045810', 'tt0029912']",2336842.0
+nm0195180,Hallie D'Amore,1942.0,2006.0,"make_up_department,actress","['tt0247638', 'tt0115857', 'tt0177789', 'tt0109830']",2334798.0
+nm0877593,Ike Turner,1931.0,2007.0,"soundtrack,actor","['tt0266697', 'tt1431045', 'tt0094812', 'tt0112697']",2327394.0
+nm0607186,Jim Morrison,1943.0,1971.0,"soundtrack,music_department,actor","['tt0109830', 'tt0120902', 'tt0993840', 'tt0098206']",2322275.0
+nm0832104,Philip Stone,1924.0,2003.0,actor,"['tt0066921', 'tt0080745', 'tt0081505', 'tt0087469']",2316142.0
+nm0413087,Andrew Jack,1944.0,2020.0,"miscellaneous,actor","['tt2488496', 'tt2015381', 'tt0035423', 'tt0370263']",2315315.0
+nm0048652,Kenny Baker,1934.0,2016.0,"actor,soundtrack,miscellaneous","['tt0080678', 'tt0081633', 'tt0080684', 'tt0121766']",2300835.0
+nm0705488,Dennis Radesky,1948.0,2009.0,"transportation_department,actor,miscellaneous","['tt0104348', 'tt0119654', 'tt0102926', 'tt0259711']",2292939.0
+nm1035270,Erik Darling,1933.0,2008.0,"soundtrack,actor,miscellaneous","['tt0109830', 'tt0190590', 'tt0087265', 'tt0050222']",2292064.0
+nm0650658,Brad Orrison,1958.0,2011.0,"stunts,actor","['tt0325980', 'tt0080455', 'tt0133152', 'tt0086250']",2289428.0
+nm0000959,Powers Boothe,1948.0,2017.0,"actor,soundtrack","['tt0108358', 'tt0848228', 'tt0114576', 'tt0401792']",2282688.0
+nm0003738,Jay Cannistraci,1930.0,2011.0,"make_up_department,actor","['tt0430357', 'tt0120890', 'tt0109830', 'tt0111255']",2281069.0
+nm0001924,Hoyt Axton,1938.0,1999.0,"soundtrack,actor,music_department","['tt0087363', 'tt0104187', 'tt0085244', 'tt0109830']",2275865.0
+nm0681920,Wilson Pickett,1941.0,2006.0,"soundtrack,actor,composer","['tt0109830', 'tt0200465', 'tt0098206', 'tt0101605']",2267144.0
+nm0823545,Kay Starr,1922.0,2016.0,"soundtrack,actress","['tt0119488', 'tt3799694', 'tt1130884', 'tt7395114']",2253696.0
+nm0922916,Bill Weston,1941.0,2012.0,"stunts,actor,miscellaneous","['tt1201607', 'tt0206634', 'tt0062622', 'tt0955308']",2243107.0
+nm0335799,Stéphane Grappelli,1908.0,1997.0,"soundtrack,music_department,actor","['tt0133093', 'tt0457939', 'tt0110216', 'tt2235695']",2237065.0
+nm0185621,Dan Cracchiolo,1965.0,2004.0,"miscellaneous,producer,actor","['tt0122151', 'tt0244244', 'tt0133093', 'tt0242445']",2229977.0
+nm0743511,Jerry Ross,1926.0,1955.0,"soundtrack,music_department,actor","['tt2404311', 'tt0099685', 'tt1231587', 'tt0208092']",2228673.0
+nm0532954,Cecil Mack,1883.0,1944.0,"soundtrack,actor","['tt0158371', 'tt0120689', 'tt1605783', 'tt1343092']",2221861.0
+nm0922187,Kit West,1936.0,2016.0,"special_effects,actor,cinematographer","['tt0087182', 'tt0086190', 'tt0116136', 'tt0082971']",2210357.0
+nm0437939,Paul Kantner,1941.0,2016.0,"soundtrack,actor,composer","['tt1127896', 'tt0109830', 'tt0243655', 'tt1019452']",2208721.0
+nm0460810,Baker Knight,1933.0,2005.0,"soundtrack,actor,music_department","['tt0411475', 'tt0110912', 'tt2066051', 'tt0120399']",2207473.0
+nm0869725,Allen Toussaint,1938.0,2015.0,"soundtrack,composer,actor","['tt0993846', 'tt0371724', 'tt2097307', 'tt3896198']",2204943.0
+nm0381041,Harold G. Herthum,1929.0,1998.0,actor,"['tt0109830', 'tt0158609', 'tt0117918', 'tt0102138']",2184206.0
+nm0379200,Paul Herman,1946.0,2022.0,actor,"['tt1045658', 'tt1302006', 'tt1800241', 'tt0113277']",2165879.0
+nm0162948,Franco Citti,1935.0,2016.0,"actor,director,writer","['tt0099674', 'tt0204186', 'tt0054599', 'tt0068646']",2162724.0
+nm0000793,Alexis Arquette,1969.0,2016.0,"actress,art_department,producer","['tt0144120', 'tt0160862', 'tt0283003', 'tt0110912']",2162349.0
+nm0572255,Gary McLarty,1941.0,2014.0,"stunts,actor,assistant_director","['tt0107290', 'tt0080455', 'tt0106856', 'tt0088247']",2157638.0
+nm0001765,Harry Dean Stanton,1926.0,2017.0,"actor,soundtrack","['tt0087995', 'tt0078748', 'tt5859238', 'tt0120689']",2157569.0
+nm0036582,Newt Arnold,1922.0,2000.0,"assistant_director,actor,writer","['tt0071562', 'tt0086567', 'tt0092675', 'tt0083658']",2149927.0
+nm0687884,Bernie Pock,1963.0,1996.0,"stunts,actor,director","['tt0095016', 'tt0088763', 'tt0111280', 'tt0098382']",2146710.0
+nm1404734,Donny Gerrard,1946.0,2022.0,"soundtrack,actor","['tt0109830', 'tt0091419', 'tt0090060', 'tt0119951']",2133490.0
+nm0594556,Jerzy Mizak,1953.0,2011.0,"production_manager,miscellaneous,actor","['tt1417075', 'tt0253474', 'tt0230656', 'tt0108052']",2120296.0
+nm0242216,Nora Dunfee,1915.0,1994.0,"miscellaneous,actress,music_department","['tt0109830', 'tt0090329', 'tt0113211', 'tt0104756']",2114343.0
+nm0638317,Jean-Pierre Nutini,1955.0,2013.0,"camera_department,actor","['tt1464540', 'tt0848228', 'tt1458175', 'tt0790724']",2109852.0
+nm0281971,Christian J. Fletcher,1968.0,2021.0,"stunts,actor","['tt0181689', 'tt0117731', 'tt0371746', 'tt0120591']",2099327.0
+nm0001079,Scatman Crothers,1910.0,1986.0,"actor,soundtrack","['tt0073486', 'tt0086491', 'tt0065421', 'tt0081505']",2096349.0
+nm0527245,Deke Richards,1944.0,2013.0,"soundtrack,composer,actor","['tt1343092', 'tt2015381', 'tt0117333', 'tt0317740']",2095922.0
+nm0090124,Bruce Boa,1930.0,2004.0,actor,"['tt0086034', 'tt0093058', 'tt0080684', 'tt0114367']",2093909.0
+nm0154693,Gary Chazan,1943.0,2000.0,"actor,miscellaneous","['tt0068646', 'tt0261199', 'tt0110141', 'tt0071315']",2088989.0
+nm0819525,G.D. Spradlin,1920.0,2011.0,"actor,director,producer","['tt0078788', 'tt0113972', 'tt0109707', 'tt0071562']",2086282.0
+nm0034009,Noby Arden,1965.0,2020.0,"stunts,actress,miscellaneous","['tt0120338', 'tt0253754', 'tt0449088', 'tt0112462']",2083822.0

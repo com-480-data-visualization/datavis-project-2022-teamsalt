@@ -620,8 +620,105 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     // Part 3
     //const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
 
+    // x-axis label
+    svg.append("text")
+        .attr("transform", "translate(" + ((width / 2) - 60) + " ," + (height + margin.top) + ")")
+        .text("Years");
+    // y-axis label
+    svg.append("text")
+        .attr("transform", "rotate(270)")
+        .attr("y", - margin.left / 2)
+        .attr("x", - height / 2 - 60)
+        .text("Average Rating");
 
+    let xScale = d3.scaleBand()
+        .domain(rangeOfYears(minYear, maxYear))
+        .padding(0.2)
+        .range([0, width]);
+    let yScale = d3.scaleLinear()
+        .domain([0, 10])
+        .range([height, 0]);
+
+    svg.append("g")
+        .attr("transform", "translate(0, " + height + ")")
+        .call(d3.axisBottom(xScale));
+    svg.append("g")
+        .call(d3.axisLeft(yScale));
+
+    // Create initial barplot
+    svg.selectAll("rect")
+        .data(plotData)
+        .enter()
+        .append("rect")
+        .attr("x", d => xScale(+(d.year)))
+        .attr("width", xScale.bandwidth())
+        .attr("fill", "#910657")
+        .attr("height", function(d) { return height - yScale(0); })
+        .attr("y", d => yScale(0))
+    // Animation
+    svg.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", function(d) { return yScale(d.meanRating); })
+        .attr("height", function(d) { return Math.abs(height - yScale(d.meanRating)); })
+        .delay(function(d, i) { /*console.log(i); */ return (i * 100) })
+
+
+    // =============================================================================
+    // Part 3
 });
+
+{
+    Promise.all([d3.csv("data/actors_top.csv"), d3.csv("data/edge_list.csv")]).then((values) => {
+        let actor_data = values[0];
+        let edge_list = values[1];
+        cy = cytoscape({
+            container: document.getElementById("cy"),
+            style: [
+                {
+                    selector: "node",
+                    style: {
+                        "width": 20,
+                        "height": 20,
+                        "background-color": "#111",
+                        "content": "data(primaryName)",
+                        "color": "#fff",
+                    }
+                },
+                {
+                    selector: "edge",
+                    style: {
+                        "width": 1,
+                        "line-color": "rgba(0.2,0.2,0.2,0.4)",
+                        "target-arrow-color": "rgba(0.2,0.2,0.2,0.4)",
+                    }
+                }
+            ],
+        });
+        // Add the nodes
+        cy.add(Array.from(actor_data.map((actor) => {
+            return {
+                group: "nodes",
+                data: { id: actor["nconst"], primaryName: actor["primaryName"] },
+                position: { x: 200, y: 200 }
+            }
+        })));
+        // Add the edges
+        cy.add(Array.from(edge_list.map((edge) => {
+            return {
+                group: "edges",
+                data: { source: edge["src"], target: edge["dst"] }
+            }
+        })));
+        // Layout
+        let layout = cy.layout({
+            name: "cose",
+            nodeDimensionsIncludeLabels: true,
+            animate: false,
+        });
+        layout.run();
+    })
+}
 
 function whenDocumentLoaded(action) {
     if (document.readyState === "loading") {
