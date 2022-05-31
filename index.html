@@ -1,13 +1,14 @@
 <!doctype html>
 
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="d3.min.js"></script>
     <script src="main.js"></script>
-    <script src="stacked_chart.js"></script>
+    <script src="cytoscape.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-core.min.js"></script>
@@ -15,15 +16,15 @@
     <script src="https://cdn.anychart.com/releases/8.8.0/js/anychart-cartesian.min.js"></script>
     <!-- <script type="module">
 
-      import * as Plot from "https://cdn.skypack.dev/@observablehq/plot@0.4";
+    import * as Plot from "https://cdn.skypack.dev/@observablehq/plot@0.4";
 
-      document.body.append(Plot.plot(options));
+    document.body.append(Plot.plot(options));
 
     </script> -->
 
 
-    <title>TeamSalt Viz</title>
-    <meta name="description" content="Data Viz">
+  <title>TeamSalt Viz</title>
+  <meta name="description" content="Data Viz">
 
 </head>
 
@@ -32,13 +33,13 @@
   <header>
     <div id="menu">
       <nav class="navbar">
-          <ul>
-              <li><a href="#pad">IMDb Visualization</a></li>
-              <li><a href="#pad">Intro</a></li>
-              <li><a href="#part1div">Part 1</a></li>
-              <li><a href="#part2div">Part 2</a></li>
-              <li><a href="#part3div">Part 3</a></li>
-          </ul>
+        <ul>
+          <li><a href="#pad">IMDb Visualization</a></li>
+          <li><a href="#pad">Intro</a></li>
+          <li><a href="#part1div">Part 1</a></li>
+          <li><a href="#part2div">Part 2</a></li>
+          <li><a href="#part3div">Part 3</a></li>
+        </ul>
       </nav>
     </div>
   </header>
@@ -46,7 +47,7 @@
   <div id="pad"></div>
 
   <h1 id="introHeader">Intro</h1>
-    <p id="intro">INTRO TEXT</p>
+  <p id="intro">INTRO TEXT</p>
 
 
   <div id="part1div">
@@ -75,11 +76,12 @@
   </div>
 
 
-<div id="part3div">
-  <!-- <h1>Part 3</h1> -->
-
-</div>
+  <div id="part3div">
+    <h1>Part 3</h1>
+    <div id="cy"></div>
+  </div>
 
 
 </body>
+
 </html>
