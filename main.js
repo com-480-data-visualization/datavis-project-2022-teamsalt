@@ -611,9 +611,11 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
                 data: { source: edge["src"], target: edge["dst"] }
             }
         })));
+        // Layout
         let layout = cy.layout({
             name: "cose",
             nodeDimensionsIncludeLabels: true,
+            animate: false,
         });
         layout.run();
     })
