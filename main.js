@@ -575,7 +575,26 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         let edge_list = values[1];
         cy = cytoscape({
             container: document.getElementById("cy"),
-            layout: { name: "grid" }
+            style: [
+                {
+                    selector: "node",
+                    style: {
+                        "width": 20,
+                        "height": 20,
+                        "background-color": "#111",
+                        "content": "data(primaryName)",
+                        "color": "#fff",
+                    }
+                },
+                {
+                    selector: "edge",
+                    style: {
+                        "width": 1,
+                        "line-color": "rgba(0.2,0.2,0.2,0.4)",
+                        "target-arrow-color": "rgba(0.2,0.2,0.2,0.4)",
+                    }
+                }
+            ],
         });
         // Add the nodes
         cy.add(Array.from(actor_data.map((actor) => {
@@ -592,6 +611,11 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
                 data: { source: edge["src"], target: edge["dst"] }
             }
         })));
+        let layout = cy.layout({
+            name: "cose",
+            nodeDimensionsIncludeLabels: true,
+        });
+        layout.run();
     })
 }
 
