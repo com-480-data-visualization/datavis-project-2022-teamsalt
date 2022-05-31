@@ -362,12 +362,129 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   const part2Div = d3.select('#part2div').append('h1').attr('id', 'top').text('Plots');
 
   // Stacked area chart
-  const stackedDiv = part2Div.append('div').attr('id', 'stacked');
+  //const stackedDiv = part2Div.append('div').attr('id', 'stacked');
 
   const optionsDivPart2 = part2Div.append('div').attr('id', 'options');
   const metricDivPart2 = optionsDivPart2.append('div').attr('id', 'metrics');
   const genreDivPart2 = optionsDivPart2.append('div').attr('id', 'genres');
 
+  const margin = { top: 40, right: 90, bottom: 80, left: 60 };
+  const width = 950 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
+
+    // ====================================================================================================================================================
+    // Stacked Area Chart
+    // test = []
+    // for (var i = 0; i < data.length; ++i) {
+    //     //console.log(data[i].genres)
+    //     var genreArray = data[i].genres.split(",")
+    //     //console.log(genreArray)
+    //     for (var j = 0; j < genreArray.length; ++j) {
+    //         //var date = data[i].startYear.slice(0, -2) + "-01-01";
+    //         test.push({ year: data[i].startYear.slice(0, -2), averageRating: +data[i].averageRating, numVotes: +data[i].numVotes, genre: genreArray[j] });
+    //     }
+    // }
+    // console.log(test)
+    // test.sort()
+    //
+    // const allKeys = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
+    //     'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Game-Show', 'History', 'Horror',
+    //     'Music', 'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
+    //     'Talk-Show', 'Thriller', 'War', 'Western'];
+    //
+    // const chart = StackedAreaChart(test, {
+    //     x: d => +d.year,
+    //     y: d => +d.numVotes,
+    //     z: d => d.genre,
+    //     yLabel: "Number of votes",
+    //     width,
+    //     height: 600,
+    //     xType: d3.scaleLinear,
+    //     xDomain: rangeOfYears(minYear, maxYear),
+    //     yDomain: rangeOfYears(10000, 260000),
+    //     zDomain: allKeys
+    // });
+
+  d3.csv("data/counting.csv").then(function(data) {
+      // var svg = d3.select("#my_dataviz")
+      //             .append("svg")
+      var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+      let svg = d3.select("#stacked")
+                  .append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  // .append("g")
+                  // .attr("transform",
+                  //     "translate(" + margin.left + "," + margin.top + ")");
+
+      function type(d, i, columns) {
+        d.startYear = parseDate(d.startYear);
+        for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = d[columns[i]] / 100;
+        return d;
+      }
+
+      console.log(data)
+
+      var keys = data.columns.slice(1);
+
+      var parseDate = d3.timeParse("%Y");
+
+      var stack = d3.stack()
+      //   .keys(keys)
+      //   (data);
+      // console.log(stack)
+
+      var x = d3.scaleTime().range([0, width]),
+          y = d3.scaleLinear().range([height, 0]),
+          z = d3.scaleOrdinal(d3.schemeCategory10);
+
+      var area = d3.area()
+      .x(function(d, i) { return x(d.data.startYear); })
+      .y0(function(d) { return y(d[0]); })
+      .y1(function(d) { return y(d[1]); });
+
+      //var svg = d3.select("svg")
+
+      var g = svg.append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      x.domain(d3.extent(data, function(d) { return d.startYear; }));
+      z.domain(keys);
+      stack.keys(keys);
+      console.log(stack(data))
+
+      var layer = g.selectAll(".layer")
+        .data(stack(data))
+        .enter().append("g")
+          .attr("class", "layer");
+
+      layer.append("path")
+          .attr("class", "area")
+          .style("fill", function(d) { return z(d.key); })
+          .attr("d", area);
+
+      layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
+        .append("text")
+          .attr("x", width)
+          .attr("y", function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
+          .attr("dy", ".35em")
+          .style("font", "10px sans-serif")
+          .style("text-anchor", "end")
+          .text(function(d) { return d.key; });
+
+      g.append("g")
+          .attr("class", "axis axis--x")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+
+      g.append("g")
+          .attr("class", "axis axis--y")
+          .call(d3.axisLeft(y).ticks(10, "%"));
+
+  });
+  // ====================================================================================================================================================
   // Metric dropdown selection
   metricDivPart2.append('label').attr('class', 'select-label').text('Select Metric:');
   const metricSelectPart2 = metricDivPart2
@@ -411,130 +528,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
             return d;
         })
 
-    const margin = { top: 40, right: 90, bottom: 80, left: 60 };
-    const width = 950 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
-
-    // ====================================================================================================================================================
-    // Stacked Area Chart
-    test = []
-    for (var i = 0; i < data.length; ++i) {
-        //console.log(data[i].genres)
-        var genreArray = data[i].genres.split(",")
-        //console.log(genreArray)
-        for (var j = 0; j < genreArray.length; ++j) {
-            //var date = data[i].startYear.slice(0, -2) + "-01-01";
-            test.push({ year: data[i].startYear.slice(0, -2), averageRating: +data[i].averageRating, numVotes: +data[i].numVotes, genre: genreArray[j] });
-        }
-    }
-    console.log(test)
-    test.sort()
-
-    const allKeys = ['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
-        'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Game-Show', 'History', 'Horror',
-        'Music', 'Musical', 'Mystery', 'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
-        'Talk-Show', 'Thriller', 'War', 'Western'];
-
-    const chart = StackedAreaChart(test, {
-        x: d => +d.year,
-        y: d => +d.numVotes,
-        z: d => d.genre,
-        yLabel: "Number of votes",
-        width,
-        height: 600,
-        xType: d3.scaleLinear,
-        xDomain: rangeOfYears(minYear, maxYear),
-        yDomain: rangeOfYears(10000, 260000),
-        zDomain: allKeys
-    });
-
-  const margin = {top: 40, right:90, bottom: 80, left: 60};
-  const width = 950 - margin.left - margin.right;
-  const height = 400 - margin.top - margin.bottom;
-
-  // ====================================================================================================================================================
-  // Stacked Area Chart
-
-  d3.csv("data/counting.csv").then(function(data) {
-    // var svg = d3.select("#my_dataviz")
-    //             .append("svg")
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
-    let svg = d3.select("#stacked")
-                .append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                // .append("g")
-                // .attr("transform",
-                //     "translate(" + margin.left + "," + margin.top + ")");
-
-    function type(d, i, columns) {
-      d.startYear = parseDate(d.startYear);
-      for (var i = 1, n = columns.length; i < n; ++i) d[columns[i]] = d[columns[i]] / 100;
-      return d;
-    }
-
-    console.log(data)
-
-    var keys = data.columns.slice(1);
-
-    var parseDate = d3.timeParse("%Y");
-
-    var stack = d3.stack()
-    //   .keys(keys)
-    //   (data);
-    // console.log(stack)
-
-    var x = d3.scaleTime().range([0, width]),
-        y = d3.scaleLinear().range([height, 0]),
-        z = d3.scaleOrdinal(d3.schemeCategory10);
-
-    var area = d3.area()
-    .x(function(d, i) { return x(d.data.startYear); })
-    .y0(function(d) { return y(d[0]); })
-    .y1(function(d) { return y(d[1]); });
-
-    //var svg = d3.select("svg")
-
-    var g = svg.append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    x.domain(d3.extent(data, function(d) { return d.startYear; }));
-    z.domain(keys);
-    stack.keys(keys);
-    console.log(stack(data))
-
-    var layer = g.selectAll(".layer")
-      .data(stack(data))
-      .enter().append("g")
-        .attr("class", "layer");
-
-    layer.append("path")
-        .attr("class", "area")
-        .style("fill", function(d) { return z(d.key); })
-        .attr("d", area);
-
-    layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
-      .append("text")
-        .attr("x", width)
-        .attr("y", function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2); })
-        .attr("dy", ".35em")
-        .style("font", "10px sans-serif")
-        .style("text-anchor", "end")
-        .text(function(d) { return d.key; });
-
-    g.append("g")
-        .attr("class", "axis axis--x")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
-
-    g.append("g")
-        .attr("class", "axis axis--y")
-        .call(d3.axisLeft(y).ticks(10, "%"));
-
-  });
-  // ====================================================================================================================================================
   // Prepare data for plots
   function prepare_data(array) {
       const moviePerYear = d3.groups(array, d => d.startYear).sort()//.filter(d => +d.startYear >= 1990);
@@ -684,15 +677,9 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
       create_plot(svg, newPlotData, metric)
   }
 
+});
   // =============================================================================
   // Part 3
-  //const part3Div = d3.select('#part3div').append('h1').attr('id', 'top').text('Jugs');
-
-
-    // =============================================================================
-    // Part 3
-});
-
 {
     Promise.all([d3.csv("data/actors_top.csv"), d3.csv("data/edge_list.csv")]).then((values) => {
         let actor_data = values[0];
