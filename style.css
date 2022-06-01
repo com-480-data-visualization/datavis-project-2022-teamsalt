@@ -123,6 +123,7 @@ p {
 /* Stacked area chart */
 #stacked {
 	margin-left: 200px;
+  /* float: left; */
 }
 
 
@@ -165,7 +166,7 @@ p {
 /* ========================================================================== */
 
 #part1div {
-  float: left;
+  /* float: left; */
   overflow: hidden;
   height: 700px;
   width: 700px;
