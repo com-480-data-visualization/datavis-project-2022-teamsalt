@@ -34,7 +34,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     const maxYear = 2022;
 
     // Define divs
-    const rankingDiv = d3.select('#part1div').append('h1').attr('id', 'top').text('Movie Rankings');
+    const rankingDiv = d3.select('#part1div').append('h1').attr('id', 'firsttop').text('Movie Rankings');
 
     const optionsDiv = rankingDiv.append('div').attr('id', 'options');
     const metricDiv = optionsDiv.append('div').attr('id', 'metrics');
@@ -304,8 +304,8 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
 
       layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
         .append("text")
-          .attr("x", width)
-          .attr("y", function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2 + 2); })
+          .attr("x", width + 20)
+          .attr("y", function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2 -3); })
           .attr("dy", ".35em")
           .style("font", "10px sans-serif")
           .style("fill", "#000")
@@ -314,6 +314,9 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
           .style("z-index", "10")
           .style("paint-order", "stroke fill")
           .text(function(d) { return d.key; });
+      svg.append("text")
+          .attr("transform", "translate(" + ((width / 2)) + " ," + (height + 50) + ")")
+          .text("Years");
 
       g.append("g")
           .attr("class", "axis axis--x")

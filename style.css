@@ -31,13 +31,13 @@ body {
   width: 0;
   height: 0;
   border-top: 200px solid transparent;
-  border-bottom: 80px solid transparent;
+  border-bottom: 75px solid transparent;
 	z-index: 5;
   border-right: 250px solid #bfbdbd;
 	opacity: 0.6;
 	visibility: hidden;
-	margin-left: 220px;
-	margin-top: 40px;
+	margin-left: 210px;
+	margin-top: 50px;
 }
 
 .container {
@@ -109,7 +109,27 @@ p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 10px;
+  /* margin-top: 100px; */
+  font-size: 25pt;
+  /* position: absolute; */
+  /* height: 500px; */
+}
+
+#paragraph {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+  /* position: absolute; */
+  /* height: 500px; */
+}
+
+#firsttop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 #top {
@@ -117,16 +137,19 @@ p {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 80px;
 }
 /* ========================================================================== */
 /* Stacked area chart */
 #stacked {
-	margin-left: 200px;
+	/* margin-left: 200px; */
+  margin-top: 120px;
+  justify-content: center;
+  align-items: center;
   /* float: left; */
+  display: flex;
+  flex-direction: column;
 }
-
-
 /* ========================================================================== */
 /* DROPDOWN SELECTION PART 1 */
 .select-label {
@@ -195,6 +218,7 @@ p {
 
 #part2div {
   clear: both;
+  margin-top: 120px;
 }
 
 #plot {

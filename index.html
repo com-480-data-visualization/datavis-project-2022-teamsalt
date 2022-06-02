@@ -10,13 +10,15 @@
     <script src="main.js"></script>
     <script src="cytoscape.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <script type="module">
-
-    import * as d3 from "https://cdn.skypack.dev/d3@7";
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"
+            integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA=="
+            crossorigin="anonymous"
+             referrerpolicy="no-referrer">
     </script>
-
+    <script type="module">
+      import * as d3 from "https://cdn.skypack.dev/d3@7";
+    </script>
 
   <title>TeamSalt Viz</title>
   <meta name="description" content="Data Viz">
@@ -24,16 +26,15 @@
 </head>
 
 <body>
-
   <header>
     <div id="menu">
       <nav class="navbar">
         <ul>
           <li><a href="#pad">IMDb Visualization</a></li>
           <li><a href="#pad">Intro</a></li>
-          <li><a href="#part1div">Part 1</a></li>
-          <li><a href="#part2div">Part 2</a></li>
-          <li><a href="#part3div">Part 3</a></li>
+          <li><a href="#stacked">Stacked Area chart</a></li>
+          <li><a href="#part2div">Statistics</a></li>
+          <li><a href="#part3">Actors</a></li>
         </ul>
       </nav>
     </div>
@@ -42,40 +43,60 @@
   <div id="pad"></div>
 
   <h1 id="introHeader">Intro</h1>
-  <p id="intro">INTRO TEXT</p>
 
+<div id="fullpage">
+  <script>
+    $(function () {
+      $("#fullpage").fullpage({
+        scrollOverflow: true,
+      })
+    })
+  </script>
 
-  <div id="part1div">
-    <!-- <h1 id="part1">Part 1</h1> -->
-
+<!-- <section class="section page">
+  <div id="intro">
+    <p id="intro"> Welcome to this visualization of the IMDb dataset </p>
   </div>
+</section> -->
 
-  <div id="stacked"> <svg width="960" height="500"></svg> </div>
-
-  <div id="part2div">
-
+<section class="section page">
+  <div id="intro">
+    <p id="intro"> Welcome to this visualization of the IMDb dataset </p>
   </div>
+  <div id="part1div"></div>
+</section>
+
+<section class="section page">
+  <div id="stacked">
+    <h1 id="top">Stacked area chart</h1>
+    <svg width="960" height="500"></svg>
+  </div>
+</section>
+
+<section class="section page">
+  <div id="part2div"></div>
 
   <div id="part2plot" class="container">
     <div id="proj_img" class="col">
       <!-- Image from: https://pixabay.com/illustrations/movie-projector-film-projector-596011/ -->
       <img src="img/projector3.png"/ width = "300" height = "300">
-
     </div>
+
     <div class="arrow-left"></div>
 
-    <div id="plot" class="col">
-
-    </div>
+    <div id="plot" class="col"></div>
 
   </div>
+  <div id="paragraph"> Text here </div>
+</section>
 
-
+<section class="section page" id="part3">
   <div id="part3div">
     <h1>Part 3</h1>
     <div id="cy"></div>
   </div>
-
+</section>
+</div>
 
 </body>
 
