@@ -262,7 +262,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
     // ====================================================================================================================================================
     // Stacked Area Chart
   d3.csv("data/counting.csv").then(function(data) {
-      var svg = d3.select("svg"),
+      var svg = d3.select("svg").style("stroke-width", "2"),
           margin = {top: 20, right: 20, bottom: 30, left: 50},
           width = svg.attr("width") - margin.left - margin.right,
           height = svg.attr("height") - margin.top - margin.bottom;
@@ -304,7 +304,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
 
       layer.filter(function(d) { return d[d.length - 1][1] - d[d.length - 1][0] > 0.01; })
         .append("text")
-          .attr("x", width + 20)
+          .attr("x", width + 18)
           .attr("y", function(d) { return y((d[d.length - 1][0] + d[d.length - 1][1]) / 2 -3); })
           .attr("dy", ".35em")
           .style("font", "10px sans-serif")
@@ -312,20 +312,21 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
           .style("text-anchor", "end")
           .style("font-weight", "bold")
           .style("z-index", "10")
+          .style("font-size", "7pt")
           .style("paint-order", "stroke fill")
           .text(function(d) { return d.key; });
       svg.append("text")
           .attr("transform", "translate(" + ((width / 2)) + " ," + (height + 50) + ")")
-          .text("Years");
+          .text("Years").style("font-weight", "bold");
 
       g.append("g")
           .attr("class", "axis axis--x")
           .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
+          .call(d3.axisBottom(x)).style("font-weight", "bold");
 
       g.append("g")
           .attr("class", "axis axis--y")
-          .call(d3.axisLeft(y));
+          .call(d3.axisLeft(y)).style("font-weight", "bold");
 
   });
   // ====================================================================================================================================================
@@ -397,10 +398,12 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
   //console.log(plotData)
   // ====================================================================================================================================================
   function create_plot(svg, plot_data, metric) {
+    svg.style("stroke-width", "2")
+
     // x-axis label
     svg.append("text")
         .attr("transform", "translate(" + ((width / 2) - 60) + " ," + (height + margin.top) + ")")
-        .text("Years");
+        .text("Years").style("font-weight", "bold");
     // y-axis label
     // svg.append("text")
     //     .attr("transform", "rotate(270)")
@@ -424,7 +427,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
           .attr("transform", "rotate(270)")
           .attr("y", - margin.left/2 - 20 )
           .attr("x", - height/2 -60)
-          .text("Number of votes");
+          .text("Number of votes").style("font-weight", "bold");
     } else {
       yScale = d3.scaleLinear()
           .domain([0, 10])
@@ -433,14 +436,14 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
           .attr("transform", "rotate(270)")
           .attr("y", - margin.left/2)
           .attr("x", - height/2 -60)
-          .text("Average Rating");
+          .text("Average Rating").style("font-weight", "bold");
     }
 
     svg.append("g")
         .attr("transform", "translate(0, " + height + ")")
-        .call(d3.axisBottom(xScale));
+        .call(d3.axisBottom(xScale)).style("font-weight", "bold");
     svg.append("g")
-        .call(d3.axisLeft(yScale));
+        .call(d3.axisLeft(yScale)).style("font-weight", "bold");
 
     // Create initial barplot
     svg.selectAll("rect")
@@ -449,7 +452,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         .append("rect")
         .attr("x", d => xScale(+(d.year)))
         .attr("width", xScale.bandwidth())
-        .attr("fill", "#910657")
+        .attr("fill", "#c70a0a")
         .attr("height", function(d) { return height - yScale(0); })
         .attr("y", d => yScale(0))
     // Animation

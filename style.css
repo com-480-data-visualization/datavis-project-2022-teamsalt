@@ -15,7 +15,7 @@ html {
 }
 
 body {
-  background-color: rgba(150, 32, 93, 0.8);
+  background-color: rgba(0, 0, 100, 0.8);
 }
 
 #proj_img {
@@ -97,7 +97,7 @@ p {
 }
 
 .navbar li a:hover {
-  color: rgba(150, 32, 93, 0.8)
+  color: red;
 }
 
 #pad {
@@ -110,7 +110,8 @@ p {
   align-items: center;
   flex-direction: column;
   /* margin-top: 100px; */
-  font-size: 25pt;
+  font-size: 30pt;
+  font-family: 'Helvetica', sans-serif;
   /* position: absolute; */
   /* height: 500px; */
 }
@@ -159,6 +160,17 @@ p {
   justify-content: center;
 }
 
+select:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
 #options {
   display: flex;
   flex: 1;
@@ -199,17 +211,19 @@ p {
   text-align: center;
   border: thick black solid;
   border-radius: 20px 10px;
-	background: #bf2e77;
+	background: rgba(0, 0, 90, 0.8);
 	margin-left: 1200px;
 	margin-top: 50px;
 	height: 550px;
 	width: 450px;
 	font-size: 25px;
+  color: white;
 }
 
 #poster img {
 	width: 250px;
 	height: 375px;
+  border: thick black solid;
 }
 
 .selected {
@@ -263,7 +277,7 @@ p {
   padding-right: 12px;
   font-variant-numeric: tabular-nums;
   align-self: flex-start;
-  background-image: linear-gradient(to bottom, aquamarine, orangered);
+  background-image: linear-gradient(to bottom, aquamarine, blue);
   background-attachment: fixed;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -275,7 +289,7 @@ p {
 }
 
 #ranked li:hover {
-  background-image: linear-gradient(to right, rgba(158, 24, 122, 0.8), rgba(150, 32, 93, 0.8));
+  background-image: linear-gradient(to right, rgba(0, 0, 120, 0.8), rgba(89, 72, 247, 0.8));
 }
 
 /* ========================================================================== */
