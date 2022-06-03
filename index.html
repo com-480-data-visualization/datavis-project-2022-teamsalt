@@ -12,104 +12,120 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/jquery.fullpage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.9.7/vendors/scrolloverflow.min.js"
-            integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA=="
-            crossorigin="anonymous"
-             referrerpolicy="no-referrer">
-    </script>
+        integrity="sha512-FzESM/E7XJBqcJyrXa08gRcpp5rDHO661C0L3vH4NsZfUWUsjN4+t6Lg8h+e8TMR2aYijIrcT+CPGq7tSugRzA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+        </script>
     <script type="module">
-      import * as d3 from "https://cdn.skypack.dev/d3@7";
+        import * as d3 from "https://cdn.skypack.dev/d3@7";
     </script>
 
-  <title>TeamSalt Viz</title>
-  <meta name="description" content="Data Viz">
+    <title>TeamSalt Viz</title>
+    <meta name="description" content="Data Viz">
 
 </head>
 
 <body>
-  <header>
-    <div id="menu">
-      <nav class="navbar">
-        <ul>
-          <li><a href="#pad">IMDb Visualization</a></li>
-          <!-- <li><a href="#pad">Intro</a></li> -->
-          <li><a href="#stacked">Stacked Area chart</a></li>
-          <li><a href="#part2div">Statistics</a></li>
-          <li><a href="#part3">Actors</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <div id="menu">
+            <nav class="navbar">
+                <ul>
+                    <li><a href="#pad">IMDb Visualization</a></li>
+                    <!-- <li><a href="#pad">Intro</a></li> -->
+                    <li><a href="#stacked">Stacked Area chart</a></li>
+                    <li><a href="#part2div">Statistics</a></li>
+                    <li><a href="#part3">Actors</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-  <div id="pad"></div>
+    <div id="pad"></div>
 
-  <h1 id="introHeader">Intro</h1>
+    <h1 id="introHeader">Intro</h1>
 
-<div id="fullpage">
-  <script>
-    $(function () {
-      $("#fullpage").fullpage({
-        scrollOverflow: true,
-      })
-    })
-  </script>
+    <div id="fullpage">
+        <script>
+            $(function () {
+                $("#fullpage").fullpage({
+                    scrollOverflow: true,
+                })
+            })
+        </script>
 
-<!-- <section class="section page">
+        <!-- <section class="section page">
   <div id="intro">
     <p id="intro"> Welcome to this visualization of the IMDb dataset </p>
   </div>
 </section> -->
 
-<section class="section page">
-  <div id="intro">
-    <p id="intro"> Welcome to this visualization of the IMDb dataset! </p>
-  </div>
-  <div id="part1div"></div>
-</section>
+        <section class="section page">
+            <div id="intro">
+                <p id="intro"> Welcome to this visualization of the IMDb dataset! </p>
+            </div>
+            <div id="part1div">
+            </div>
+        </section>
 
-<section class="section page">
-  <div id="stacked">
-    <h1 id="top">Stacked area chart</h1>
-    <svg width="960" height="500"></svg>
-  </div>
-</section>
+        <section class="section page">
+            <div id="stacked">
+                <h1 id="top">Stacked area chart</h1>
+                <div>
+                    <p style="margin-left: 100px; margin-right: 100px;">
+                        Here we plotted a graph that shows the evolution of the
+                        most influential genre of movies across time. Each area
+                        represents a percent of the total share of movies that were
+                        made that year.
+                    </p>
+                </div>
+                <svg width="960" height="500"></svg>
+            </div>
+        </section>
 
-<section class="section page">
-  <div id="part2div"></div>
+        <section class="section page">
+            <div id="part2div"></div>
+            <div>
+                <p style="margin-left: 100px; margin-right: 100px;">
+                    In this section of the report we built a tool that allows you to
+                    visualize many different statistics about the dataset in the form of
+                    bar-charts. Requesting information triggers an animation of
+                    a projector figuratively beaming the data on your screen.
+                </p>
+            </div>
 
-  <div id="part2plot" class="container">
-    <div id="proj_img" class="col">
-      <!-- Image from: https://pixabay.com/illustrations/movie-projector-film-projector-596011/ -->
-      <img src="img/projector3.png"/ width = "300" height = "300">
+            <div id="part2plot" class="container">
+                <div id="proj_img" class="col">
+                    <!-- Image from: https://pixabay.com/illustrations/movie-projector-film-projector-596011/ -->
+                    <img src="img/projector3.png" / width="300" height="300">
+                </div>
+
+                <div class="arrow-left"></div>
+
+                <div id="plot" class="col"></div>
+
+            </div>
+            <!-- <div id="paragraph"> Text here </div> -->
+        </section>
+
+        <section class="section page" id="part3">
+            <div id="part3div">
+                <h1 style="margin-left: 100px;">Analyzing the actor relationship network</h1>
+                <div>
+                    <p style="margin-left: 100px; margin-right: 100px;">
+                        In order to gain a better understanding of how actors relate to each other,
+                        we decided to plot a graph. In this graph, each node is an actor, and two
+                        nodes are connected if the corresponding actors have starred in a movie
+                        together. The nodes are placed so that clusters are clearly highlighted and
+                        separate from each other.
+
+                        You can drag to move around and clicking on an actor displays additional
+                        information.
+                    </p>
+                </div>
+                <div id="cy"></div>
+            </div>
     </div>
-
-    <div class="arrow-left"></div>
-
-    <div id="plot" class="col"></div>
-
-  </div>
-  <!-- <div id="paragraph"> Text here </div> -->
-</section>
-
-<section class="section page" id="part3">
-  <div id="part3div">
-    <h1 style="margin-left: 100px;">Analyzing the actor relationship network</h1>
-    <div>
-    <p style="margin-left: 100px; margin-right: 100px;">
-    In order to gain a better understanding of how actors relate to each other,
-    we decided to plot a graph. In this graph, each node is an actor, and two
-    nodes are connected if the corresponding actors have starred in a movie
-    together. The nodes are placed so that clusters are clearly highlighted and
-    separate from each other.
-    
-    You can drag to move around and clicking on an actor displays additional
-    information.
-    </p>
-    </div>
-    <div id="cy"></div>
-  </div>
-</div>
-<div style="height: 100px"> </div>
-</section>
+    <div style="height: 100px"> </div>
+    </section>
 
 </body>
 
