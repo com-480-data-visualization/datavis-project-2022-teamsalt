@@ -119,10 +119,10 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=" + film_name + "&callback=?", function(json) {
             if (json != "Nothing found.") {
                 $('#poster').html('</p><img id="temp" src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
-            } else {
-                $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?", function(json) {
-                    $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div><p>Perhaps you were looking for The Goonies?</p><img id="thePoster" src="http://image.tmdb.org/t/p/w500/' + json[0].poster_path + ' class="img-responsive" />');
-                });
+            // } else {
+            //     $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=goonies&callback=?", function(json) {
+            //         $('#poster').html('<div class="alert"><p>We\'re afraid nothing was found for that search.</p></div><p>Perhaps you were looking for The Goonies?</p><img id="thePoster" src="http://image.tmdb.org/t/p/w500/' + json[0].poster_path + ' class="img-responsive" />');
+            //     });
             }
         });
     }
@@ -579,7 +579,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         cy.add(Array.from(actor_data.map((actor) => {
             return {
                 group: "nodes",
-                data: { id: actor["nconst"], primaryName: actor["primaryName"] },
+                data: { id: actor["nconst"], primaryName: actor["primaryName"], byear: actor["birthYear"], dyear: actor["deathYear"] },
                 position: { x: 200, y: 200 }
             }
         })));
@@ -598,10 +598,18 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         });
         layout.run();
         cy.zoom(1.001);
+
+        let details = d3.select("#details")
         // Additional actor information
         cy.on("click", "node", (event) => {
+            details.selectAll("#temp2").remove()
             let node = event.target;
             console.log(node.id());
+            details.append("div").attr("id", "temp2")
+                   .append("div")
+                   .text("Date of birth: " + node.data("byear").slice(0, -2))
+                   .append("div")
+                   .text("Date of death: " + node.data("dyear").slice(0, -2))
         })
     })
 }
