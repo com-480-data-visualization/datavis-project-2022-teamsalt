@@ -13,7 +13,7 @@
 
 ## Milestone 3
 * Process book can be found [here](https://github.com/com-480-data-visualization/datavis-project-2022-teamsalt/blob/main/Process%20Book.pdf)
-* Screencast can be found [here](https://github.com/com-480-data-visualization/datavis-project-2022-teamsalt/blob/main/screencast.mkv)
+* Screencast can be found [here](https://github.com/com-480-data-visualization/datavis-project-2022-teamsalt/blob/main/screencast.mkv) or in [Google Drive](https://drive.google.com/file/d/1qj9OybM5l1mHf_k3oiA6-DvNVH56XQzw/view)
 * Visualization can be found [here](https://com-480-data-visualization.github.io/datavis-project-2022-teamsalt/). <br> Please note that it may take one or two seconds to load. It should work fine on both Google Chrome and Firefox.
 
 ## Content
