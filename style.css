@@ -349,5 +349,24 @@ select:after {
   align-items: center;
   justify-content: center;
   margin: auto;
+  margin-left: 100px;
   margin-bottom: 100px;
+  float: left;
+  display: flex;
+  flex-direction: column;
+}
+
+#temp2 {
+  text-align: center;
+  border: thick black solid;
+  border-radius: 20px 10px;
+	background: rgba(0, 0, 90, 0.8);
+  margin-top: 220px;
+	margin-left: 920px;
+	height: 40px;
+	width: 150px;
+	font-size: 15px;
+  color: white;
+  display: flex;
+  flex-direction: column;
 }
