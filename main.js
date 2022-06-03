@@ -452,7 +452,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         .append("rect")
         .attr("x", d => xScale(+(d.year)))
         .attr("width", xScale.bandwidth())
-        .attr("fill", "#c70a0a")
+        .attr("fill", "#961c0c")
         .attr("height", function(d) { return height - yScale(0); })
         .attr("y", d => yScale(0))
     // Animation
@@ -604,7 +604,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         cy.on("click", "node", (event) => {
             details.selectAll("#temp2").remove()
             let node = event.target;
-            console.log(node.id());
+            //console.log(node.id());
             details.append("div").attr("id", "temp2")
                    .append("div")
                    .text("Date of birth: " + node.data("byear").slice(0, -2))
