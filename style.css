@@ -326,8 +326,14 @@ p {
 
 /* ========================================================================== */
 #cy {
-  width: 1200px;
-  height: 750px;
+  width: 800px;
+  height: 500px;
   display: block;
   background-color: rgba(150, 32, 93, 0.8);
+  outline: solid 3px black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 100px;
 }
