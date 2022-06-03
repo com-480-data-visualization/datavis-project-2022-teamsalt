@@ -553,7 +553,6 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
         let edge_list = values[1];
         cy = cytoscape({
             container: document.getElementById("cy"),
-            zoom: 2,
             userZoomingEnabled: false,
             style: [
                 {
@@ -598,7 +597,7 @@ d3.csv("data/movie_dataset.csv").then(function(data) {
             animate: false,
         });
         layout.run();
-
+        cy.zoom(1.001);
         // Additional actor information
         cy.on("click", "node", (event) => {
             let node = event.target;

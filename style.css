@@ -343,7 +343,7 @@ select:after {
   width: 800px;
   height: 500px;
   display: block;
-  background-color: rgba(150, 32, 93, 0.8);
+  background-color: #5c59bd;
   outline: solid 3px black;
   display: flex;
   align-items: center;
